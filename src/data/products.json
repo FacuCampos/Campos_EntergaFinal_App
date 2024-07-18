@@ -1,0 +1,257 @@
+[
+  {
+    "id": 1,
+    "titulo": "Camiseta Jordan Los Ángeles Lakers Statement Edition de LeBron James #23",
+    "descripcion": "La camiseta Jordan Los Angeles Lakers Statement Edition de LeBron James es un símbolo de respeto al icónico jugador de baloncesto y a su equipo, los Los Angeles Lakers. Hecha con materiales de primera y un diseño que captura el estilo distintivo del equipo, esta prenda garantiza confort y elegancia tanto en la cancha como fuera de ella. Incluye detalles auténticos del equipo y el nombre de LeBron James, convirtiéndola en una pieza deseada por todos los aficionados.",
+    "precio": 150000,
+    "stock": 10,
+    "marca": "jordan",
+    "categoria": "camisetas",
+    "thumbnail": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flakersstore.com%2Fcdn%2Fshop%2Ffiles%2Fjames23mockups-57.png%3Fv%3D1689098636%26width%3D1080&f=1&nofb=1&ipt=9826af5d6fffa18f8d8c8179e4f4eed7236ffe7251fcdf25e2cda65e4fb24c03&ipo=images",
+    "imagenes": [
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flakersstore.com%2Fcdn%2Fshop%2Ffiles%2Fjames23mockups-57.png%3Fv%3D1689098636%26width%3D1080&f=1&nofb=1&ipt=9826af5d6fffa18f8d8c8179e4f4eed7236ffe7251fcdf25e2cda65e4fb24c03&ipo=images"
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "Camiseta Nike Golden State Warriors Icon Edition de Stephen Curry #30",
+    "descripcion": "La camiseta Icon Edition de Steph Curry es una expresión genuina de la habilidad y estilo característicos del jugador estrella de los Golden State Warriors. Confeccionada con materiales de primera calidad y un diseño que celebra la identidad única del equipo, esta camiseta ofrece tanto confort como un look audaz en y fuera de la cancha. Incorpora detalles auténticos del equipo y el nombre de Curry destacando su legado en la NBA, convirtiéndola en un imprescindible para los seguidores apasionados del baloncesto y los admiradores del mejor tirador de todos los tiempos.",
+    "precio": 130000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "camisetas",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 3,
+    "titulo": "Camiseta Nike Chicago Bulls Edición Campeón de Michael Jordan #23",
+    "descripcion": "La Camiseta Nike Chicago Bulls Edición Campeón de Michael Jordan es un tributo emblemático al legendario jugador y su legado con los Chicago Bulls. Fabricada con materiales de alta calidad, esta camiseta captura la esencia del campeonato histórico del equipo. Diseñada para ofrecer comodidad y estilo, tanto en la cancha como fuera de ella, presenta detalles auténticos del equipo y el número icónico de Jordan, convirtiéndola en una pieza esencial para cualquier aficionado que celebre la era dorada del baloncesto.",
+    "precio": 160000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "camisetas",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 4,
+    "titulo": "Camiseta San Antonio Spurs Association Edition de Manu Ginóbili #20",
+    "descripcion": "La Camiseta San Antonio Spurs Association Edition de Manu Ginóbili es un homenaje distintivo al querido jugador argentino y su legado con los San Antonio Spurs. Fabricada por Nike con materiales de primera calidad, esta camiseta captura la esencia del espíritu competitivo del equipo. Diseñada para ofrecer confort y estilo en la cancha y más allá, presenta detalles auténticos del equipo y el número icónico de Ginóbili, siendo una elección ideal para los aficionados que celebran la contribución única del jugador a la historia del baloncesto.",
+    "precio": 90000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "camisetas",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 5,
+    "titulo": "Remera Boston Celtics de Tatum - Negra",
+    "descripcion": "Luce con orgullo tus colores y tu pasión por el baloncesto con la remera negra de los Boston Celtics, inspirada en el talento del increíble Jayson Tatum. Confeccionada en algodón suave y transpirable, esta remera ofrece comodidad durante todo el día, ya sea en la cancha o en la calle. Su diseño moderno y elegante incluye el icónico logotipo de los Celtics y el nombre de Tatum, perfectos para los verdaderos aficionados. ¡No te pierdas la oportunidad de mostrar tu apoyo a uno de los mejores jugadores de la NBA! Ideal para combinar con tus prendas deportivas favoritas o simplemente para un look casual.",
+    "precio": 35000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "remeras",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 6,
+    "titulo": "Remera New York Knicks new era - Azul",
+    "descripcion": "Confeccionada en una mezcla de algodón de alta calidad, ofrece una sensación suave y cómoda, ideal para usar en cualquier ocasión. El logotipo clásico de los Knicks en el frente resalta tu pasión por el baloncesto y añade un toque urbano a tu estilo. Combínala con tus jeans o pantalones deportivos favoritos para un look casual y auténtico. ¡Prepárate para animar a tu equipo con esta remera imprescindible!",
+    "precio": 35000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "remeras",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 7,
+    "titulo": "Remera Air Jordan GX",
+    "descripcion": "Te presentamos la nueva Remera Nike Jordan, confeccionada con los mejores materiales y con un gran estilo urbano para que puedas llevar a todas partes.",
+    "precio": 17000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "remeras",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 8,
+    "titulo": "Remera Entrenamiento Under Armour",
+    "descripcion": "Maximiza tu rendimiento con la remera de entrenamiento de Under Armour. Diseñada para ofrecer comodidad y soporte, esta prenda está confeccionada con tecnología de absorción de humedad que mantiene tu piel seca durante las sesiones más intensas. Su ajuste ligero y transpirable permite una libertad de movimiento excepcional, perfecta para el gimnasio, la cancha o cualquier actividad al aire libre. Con un estilo moderno y logo distintivo de Under Armour, esta remera es ideal para los atletas que buscan combinar funcionalidad y estilo.",
+    "precio": 45000,
+    "stock": 10,
+    "marca": "under armour",
+    "categoria": "remeras",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 9,
+    "titulo": "Short Brooklyn Nets Icon Edition",
+    "descripcion": "Los shorts Nike NBA de Brooklyn Nets Icon Edition están basados en los shorts originales de la NBA. Están hechos con una tela que absorbe la humedad y cuentan con bolsillos laterales para un fácil acceso. Su diseño refleja el estilo que el equipo utiliza en el campo.",
+    "precio": 14000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "shorts",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 10,
+    "titulo": "Short And1 clásico - Blanco",
+    "descripcion": "Fabricados con tela de malla transpirable de alta calidad, estos shorts te mantendrán fresco y cómodo durante todo el día. Con un diseño clásico y detalles de calidad, son ideales para jugar al basquet, hacer ejercicio o simplemente relajarse.",
+    "precio": 43000,
+    "stock": 10,
+    "marca": "and1",
+    "categoria": "shorts",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 11,
+    "titulo": "Bermuda Under Armour Rival Terry",
+    "descripcion": "Diseñada con tela Terry suave y transpirable, esta bermuda te brinda una sensación de ligereza y frescura durante todo el día. Ya sea para entrenar o relajarte, esta prenda se convertirá en tu favorita. ¡Añade un toque de estilo deportivo a tu vestuario con la Bermuda Under Armour Rival Terry!",
+    "precio": 40000,
+    "stock": 10,
+    "marca": "under armour",
+    "categoria": "shorts",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 12,
+    "titulo": "Pantalon Jordan Jumpman Logo",
+    "descripcion": "Los pantalones de tejido Fleece para hombre Jordan Jumpman Logo incorporan un gráfico de Jumpman extragrande en tela suave de tejido Fleece para una comodidad que se mantiene cuando baja la temperatura.",
+    "precio": 99000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "pantalones",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 13,
+    "titulo": "Pantalon Converse Chupin New Basic",
+    "descripcion": "Pantalon Converse Chupin New Basic",
+    "precio": 60000,
+    "stock": 10,
+    "marca": "converse",
+    "categoria": "pantalones",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 14,
+    "titulo": "Campera Under Armour Sportstyle Terry",
+    "descripcion": "Confeccionada con tejido terry suave y transpirable, esta campera ofrece comodidad y estilo para tus aventuras urbanas o entrenamientos. Con detalles de calidad y diseño deportivo, la Sportstyle Terry es una opción versátil para cualquier actividad. Disfruta del máximo rendimiento y estilo con la Campera Under Armour Sportstyle Terry para hombre.",
+    "precio": 77000,
+    "stock": 10,
+    "marca": "under armour",
+    "categoria": "camperas",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 15,
+    "titulo": "Campera Adidas Essentials French Terry 3 Stripes",
+    "descripcion": "Con todo lo que tenés que hacer en el día, necesitás algo que se adapte a tus necesidades. Para eso existe esta campera con capucha adidas con cierre frontal. Se trata del Classic Sport Style 101 con logos de adidas que se destacan sobre una estructura sólida. Una sorpresa sutil llega cuando subís la capucha: las 3 Tiras que van de puño a puño y fluyen hasta arriba. Cuando terminás tu día, el tejido de felpa francesa suave te envuelve con comodidad.",
+    "precio": 82000,
+    "stock": 10,
+    "marca": "adidas",
+    "categoria": "camperas",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 16,
+    "titulo": "Buzo Converse BB Ring",
+    "descripcion": "Este buzo presenta un diseño moderno y distintivo, con el logotipo de Converse estampado en el pecho, añadiendo un toque de autenticidad a tu atuendo urbano. Fabricado con materiales de alta calidad y un ajuste cómodo, el Buzo Converse BB Ring es perfecto para cualquier ocasión, ya sea para una salida informal o simplemente para relajarte en casa con estilo. Completa tu look con este buzo llamativo y muestra tu pasión por la moda urbana.",
+    "precio": 67000,
+    "stock": 10,
+    "marca": "converse",
+    "categoria": "buzos",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 17,
+    "titulo": "Buzo Reebok Identity Big Logo",
+    "descripcion": "Este buzo fusiona moda y comodidad para brindarte un look urbano impecable. Fabricado con un suave tejido fleece, te proporciona calidez y confort durante todo el día. El diseño del Buzo Reebok Identity Big Logo Fleece presenta un estampado camuflado que añade un toque de originalidad a tu estilo. Además, cuenta con el gran logotipo Reebok en el frente, lo que le otorga un detalle audaz y distintivo a tu atuendo urbano.",
+    "precio": 58000,
+    "stock": 10,
+    "marca": "reebok",
+    "categoria": "buzos",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 18,
+    "titulo": "Zapatilla Adidas Trae Young Unlimited 2 Low",
+    "descripcion": "Añadí velocidad a tu juego y básquet al igual que Trae Young. Estas zapatillas exclusivas de adidas Basketball fueron creadas para igualar el estilo único y veloz de Trae, con una mediasuela Lightstrike ultraliviana que te hará volar por la cancha. La parte superior textil hace que tu look destaque, porque el estilo es una de las cosas que hacen que Trae se destaque también.",
+    "precio": 144000,
+    "stock": 10,
+    "marca": "adidas",
+    "categoria": "calzado",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 19,
+    "titulo": "Zapatilla Jordan Air 1 High Satin Bred",
+    "descripcion": "Las Air Jordan 1 High Satin Bred son unas zapatillas de basquet. La parte superior de tela satinada de este modelo clásico presenta una combinación de colores negro, rojo universitario y blanco. La suela de goma es duradera y ofrece tracción en una variedad de superficies. La tecnología Nike Air absorbe el impacto para brindar amortiguación en cada paso.",
+    "precio": 210000,
+    "stock": 10,
+    "marca": "nike",
+    "categoria": "calzado",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 20,
+    "titulo": "Manga McDavid HexPad Arm Sleeve",
+    "descripcion": "La manga está diseñada con tecnología Hex™ para ajustarse cómodamente desde la zona media del brazo a la muñeca. Incluye la tecnología innovadora de control de la humedad hDc™ para garantizar el máximo confort. Diseño unisex y en forma universal;Tecnología Hex™ 9mm en el codo;Compresión del brazo mantiene los músculos calientes y evita abrasiones y rasguños;Tecnología de control de la humedad hDc™ para mantener todo fresco y seco;Se puede utilizar en la lavadora y secadora;Incluye una manga",
+    "precio": 35000,
+    "stock": 10,
+    "marca": "mcdavid",
+    "categoria": "accesorios",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 21,
+    "titulo": "Muñequera Wilson Doble Z1267",
+    "descripcion": "Diseñada para brindar soporte y estabilidad durante tus actividades deportivas, esta muñequera de calidad superior es la elección perfecta para jugadores serios. Confeccionada con materiales duraderos y un ajuste cómodo, la Muñequera Wilson Doble Z1267 te permite concentrarte en tu juego sin preocuparte por las lesiones. Descubre la combinación perfecta de funcionalidad y estilo con esta muñequera de Wilson, un accesorio esencial para cualquier atleta.",
+    "precio": 13500,
+    "stock": 10,
+    "marca": "wilson",
+    "categoria": "accesorios",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 22,
+    "titulo": "Pelota Spalding Basquet Nro 7 Varsity FIBA",
+    "descripcion": "Con su diseño oficial FIBA, esta pelota cumple con los estándares más exigentes de la federación internacional de baloncesto, garantizando un juego profesional y auténtico. Fabricada con materiales de alta calidad, ofrece un agarre superior, un rebote consistente y una durabilidad excepcional. Su tamaño estándar número 7 la hace perfecta para competiciones y entrenamientos de baloncesto de alto nivel. Ya sea para jugar en interiores o exteriores, la Pelota Spalding Básquet Número 7 Varsity FIBA te llevará al siguiente nivel en la cancha. ¡Hazte con la tuya hoy y experimenta el baloncesto como nunca antes!",
+    "precio": 37800,
+    "stock": 10,
+    "marca": "spalding",
+    "categoria": "pelotas",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  },
+  {
+    "id": 23,
+    "titulo": "Pelota Molten Basquet Nro 7 BG4500",
+    "descripcion": "Certificada para baloncesto, esta pelota de tamaño Nro 7 ofrece un rendimiento superior en cada jugada. Con un diseño atractivo y detalles distintivos, la BG4500 de Molten destaca en la cancha. El agarre superior y la durabilidad hacen que esta pelota sea perfecta para entrenamientos intensivos y competiciones apasionadas. Eleva tu juego con la Pelota Molten Básquet Nro 7 BG4500. ¡Adquiere la tuya ahora y disfruta de la calidad en cada pase y tiro!",
+    "precio": 130000,
+    "stock": 10,
+    "marca": "molten",
+    "categoria": "pelotas",
+    "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
+    "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
+  }
+]
