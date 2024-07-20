@@ -1,5 +1,7 @@
 import {
+  Dimensions,
   FlatList,
+  Pressable,
   StyleSheet,
   Text,
   useWindowDimensions,
@@ -9,11 +11,16 @@ import React, { useEffect, useState } from "react";
 
 import productos from "../data/products.json";
 import { Search, ProductItem } from "../components";
+import { colors } from "../global/colors";
+
+import { Ionicons } from "@expo/vector-icons";
+
+const anchoPantalla = Dimensions.get("screen").width;
 
 const ItemListCategory = ({ navigation, route }) => {
   const [keyword, setKeyword] = useState("");
   const [productosFiltrados, setProductosFiltrados] = useState([]);
-  
+
   const [error, setError] = useState("");
 
   const { categoriaElegida } = route.params;
@@ -55,6 +62,15 @@ const ItemListCategory = ({ navigation, route }) => {
 
   return (
     <View style={portrait ? styles.container : styles.containerLandscape}>
+      <View style={styles.catTituloContainer}>
+        <Pressable style={styles.iconBack} onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back-circle" size={30} color="black" />
+        </Pressable>
+        <Text style={styles.catTitulo}>
+          {categoriaElegida.charAt(0).toUpperCase() +
+            categoriaElegida.slice(1).toLowerCase()}
+        </Text>
+      </View>
       <Search
         error={error}
         onSearch={setKeyword}
@@ -92,11 +108,11 @@ export default ItemListCategory;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.fondo,
     width: "100%",
     flex: 1,
-    marginTop: 10,
     flexDirection: "column",
-    gap: 10,
+    alignItems: "center",
   },
   containerLandscape: {
     width: "100%",
@@ -107,4 +123,32 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     gap: 20,
   },
+  catTituloContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.terceario,
+    paddingBottom: 10,
+    overflow: "hidden",
+    
+    shadowColor: "black",
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 4.65,
+    elevation: 4,
+  },
+  iconBack: {
+    paddingHorizontal: 10,
+    top: 5
+  },
+  catTitulo: {
+    fontSize: 30,
+    textAlign: "center",
+    fontFamily: "OswaldMedium",
+    textAlignVertical: "center",
+    width: anchoPantalla - 88,
+  }
 });

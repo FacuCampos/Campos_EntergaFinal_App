@@ -9,9 +9,6 @@ const Search = ({ onSearch = () => {}, goBack = () => {}, error = "" }) => {
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.icons} onPress={goBack}>
-        <AntDesign name="back" size={24} color="black" />
-      </Pressable>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -39,6 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "start",
     gap: 18,
+    marginVertical: 20
   },
   icons: {
     top: 10,

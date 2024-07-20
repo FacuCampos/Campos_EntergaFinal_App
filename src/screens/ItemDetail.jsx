@@ -14,6 +14,7 @@ import productos from "../data/products.json";
 import { colors } from "../global/colors";
 
 const ItemDetail = ({ navigation, route }) => {
+
   const { width, height } = useWindowDimensions();
 
   const {productoElegido} = route.params
@@ -90,6 +91,7 @@ export default ItemDetail;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.fondo,
   },
   buttons: {
     backgroundColor: colors.secundario,

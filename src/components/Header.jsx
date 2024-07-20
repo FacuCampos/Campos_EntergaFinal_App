@@ -8,24 +8,15 @@ import {
 } from "react-native";
 import React from "react";
 
-import { Ionicons } from "@expo/vector-icons";
-
 import { colors } from "../global/colors";
 
-const Header = ({ titulo, producto = null, navigation}) => {
+const Header = ({ titulo, producto = null, categoriaElegida, navigation, route}) => {
+
+  categoriaElegida && console.log('hola');
+
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>{titulo}</Text>
-
-      {producto && (
-        <Pressable
-          style={styles.buttonBack}
-          onPress={() => navigation.goBack()}
-        >
-          <Ionicons name="arrow-back-circle" size={24} color={colors.fondo} />
-          <Text style={styles.buttonText}>Back</Text>
-        </Pressable>
-      )}
     </View>
   );
 };
@@ -34,17 +25,22 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
     paddingBottom: 10,
     width: "100%",
     backgroundColor: colors.primario,
     justifyContent: "center",
-    alignItems: "center",
   },
   titulo: {
+    textAlign: 'center',
     color: colors.fondo,
     fontSize: 28,
     fontFamily: "OswaldMedium",
-    marginBottom: 5
+    marginBottom: 5,
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: -1, height: 2 },
+    textShadowRadius: 2,
+
   },
   buttonBack: {
     width: '100%',

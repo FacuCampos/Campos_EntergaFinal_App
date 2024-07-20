@@ -20,7 +20,7 @@ const formatData = (data, numColumns) => {
   return data;
 };
 
-const CategoryList = ({ navigation }) => {
+const CategoryList = ({ navigation, route }) => {
   const { width, height } = useWindowDimensions();
   const [orientacion, setOrientacion] = useState("portrait");
   const [key, setKey] = useState("flatListPortrait");
@@ -50,7 +50,7 @@ const CategoryList = ({ navigation }) => {
         if (item == "vacio") {
           return <View style={styles.itemInvisible} />;
         } else {
-          return <Card categoriaElegida={item} navigation={navigation} />;
+          return <Card categoriaElegida={item} navigation={navigation}/>;
         }
       }}
     />

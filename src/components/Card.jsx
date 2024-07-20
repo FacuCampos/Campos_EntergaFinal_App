@@ -11,7 +11,7 @@ const Card = ({ categoriaElegida, navigation }) => {
 
   return (
       <TouchableOpacity style={styles.touchableOpacity} onPress={() => navigation.navigate('ItemListCategory', {categoriaElegida})}>
-        <Text style={styles.texto}>{categoriaElegida}</Text>
+        <Text style={styles.texto}>{categoriaElegida.charAt(0).toUpperCase() + categoriaElegida.slice(1).toLowerCase()}</Text>
       </TouchableOpacity>
   );
 };
