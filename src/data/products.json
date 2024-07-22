@@ -6,7 +6,7 @@
     "precio": 150000,
     "stock": 10,
     "marca": "jordan",
-    "categoria": "camisetas",
+    "category": "camisetas",
     "thumbnail": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flakersstore.com%2Fcdn%2Fshop%2Ffiles%2Fjames23mockups-57.png%3Fv%3D1689098636%26width%3D1080&f=1&nofb=1&ipt=9826af5d6fffa18f8d8c8179e4f4eed7236ffe7251fcdf25e2cda65e4fb24c03&ipo=images",
     "imagenes": [
       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flakersstore.com%2Fcdn%2Fshop%2Ffiles%2Fjames23mockups-57.png%3Fv%3D1689098636%26width%3D1080&f=1&nofb=1&ipt=9826af5d6fffa18f8d8c8179e4f4eed7236ffe7251fcdf25e2cda65e4fb24c03&ipo=images"
@@ -19,7 +19,7 @@
     "precio": 130000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "camisetas",
+    "category": "camisetas",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -30,7 +30,7 @@
     "precio": 160000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "camisetas",
+    "category": "camisetas",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -41,7 +41,7 @@
     "precio": 90000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "camisetas",
+    "category": "camisetas",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -52,7 +52,7 @@
     "precio": 35000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "remeras",
+    "category": "remeras",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -63,7 +63,7 @@
     "precio": 35000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "remeras",
+    "category": "remeras",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -74,7 +74,7 @@
     "precio": 17000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "remeras",
+    "category": "remeras",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -85,7 +85,7 @@
     "precio": 45000,
     "stock": 10,
     "marca": "under armour",
-    "categoria": "remeras",
+    "category": "remeras",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -96,7 +96,7 @@
     "precio": 14000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "shorts",
+    "category": "shorts",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -107,7 +107,7 @@
     "precio": 43000,
     "stock": 10,
     "marca": "and1",
-    "categoria": "shorts",
+    "category": "shorts",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -118,7 +118,7 @@
     "precio": 40000,
     "stock": 10,
     "marca": "under armour",
-    "categoria": "shorts",
+    "category": "shorts",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -129,7 +129,7 @@
     "precio": 99000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "pantalones",
+    "category": "pantalones",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -140,7 +140,7 @@
     "precio": 60000,
     "stock": 10,
     "marca": "converse",
-    "categoria": "pantalones",
+    "category": "pantalones",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -151,7 +151,7 @@
     "precio": 77000,
     "stock": 10,
     "marca": "under armour",
-    "categoria": "camperas",
+    "category": "camperas",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -162,7 +162,7 @@
     "precio": 82000,
     "stock": 10,
     "marca": "adidas",
-    "categoria": "camperas",
+    "category": "camperas",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -173,7 +173,7 @@
     "precio": 67000,
     "stock": 10,
     "marca": "converse",
-    "categoria": "buzos",
+    "category": "buzos",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -184,7 +184,7 @@
     "precio": 58000,
     "stock": 10,
     "marca": "reebok",
-    "categoria": "buzos",
+    "category": "buzos",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -195,7 +195,7 @@
     "precio": 144000,
     "stock": 10,
     "marca": "adidas",
-    "categoria": "calzado",
+    "category": "calzado",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -206,7 +206,7 @@
     "precio": 210000,
     "stock": 10,
     "marca": "nike",
-    "categoria": "calzado",
+    "category": "calzado",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -217,7 +217,7 @@
     "precio": 35000,
     "stock": 10,
     "marca": "mcdavid",
-    "categoria": "accesorios",
+    "category": "accesorios",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -228,7 +228,7 @@
     "precio": 13500,
     "stock": 10,
     "marca": "wilson",
-    "categoria": "accesorios",
+    "category": "accesorios",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -239,7 +239,7 @@
     "precio": 37800,
     "stock": 10,
     "marca": "spalding",
-    "categoria": "pelotas",
+    "category": "pelotas",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   },
@@ -250,7 +250,7 @@
     "precio": 130000,
     "stock": 10,
     "marca": "molten",
-    "categoria": "pelotas",
+    "category": "pelotas",
     "thumbnail": "https://via.placeholder.com/500x500?text=Logo",
     "imagenes": ["https://via.placeholder.com/500x500?text=Logo"]
   }

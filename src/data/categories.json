@@ -3,6 +3,10 @@
         "nombre":"camisetas",
         "imagen": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flakersstore.com%2Fcdn%2Fshop%2Ffiles%2Fjames23mockups-57.png%3Fv%3D1689098636%26width%3D1080&f=1&nofb=1&ipt=9826af5d6fffa18f8d8c8179e4f4eed7236ffe7251fcdf25e2cda65e4fb24c03&ipo=images"
     },
+    {        
+        "nombre" : "remeras",
+        "imagen": "https://via.placeholder.com/500x500?text=Logo"
+    },
     {
         "nombre" : "shorts",
         "imagen": "https://via.placeholder.com/500x500?text=Logo"

@@ -11,11 +11,11 @@ import { colors } from "./src/global/colors";
 
 export default function App() {
   const [fontsLoaded, fontsError] = useFonts({
-    OswaldLight: require("./assets/fonts/Oswald/Oswald-Light.ttf"),
-    OswaldMedium: require("./assets/fonts/Oswald/Oswald-Medium.ttf"),
-    OswaldBold: require("./assets/fonts/Oswald/Oswald-Bold.ttf"),
-    PlayfairDisplayRegular: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Regular.ttf"),
-    PlayfairDisplayBold: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Bold.ttf"),
+    TituloLight: require("./assets/fonts/Oswald/Oswald-Light.ttf"),
+    TituloMedium: require("./assets/fonts/Oswald/Oswald-Medium.ttf"),
+    TituloBold: require("./assets/fonts/Oswald/Oswald-Bold.ttf"),
+    SecundariaRegular: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Regular.ttf"),
+    SecundariaBold: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Bold.ttf"),
   });
 
   if (!fontsLoaded && !fontsError) {

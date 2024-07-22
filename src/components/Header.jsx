@@ -1,6 +1,5 @@
 import {
   Platform,
-  Pressable,
   StatusBar,
   StyleSheet,
   Text,
@@ -10,9 +9,7 @@ import React from "react";
 
 import { colors } from "../global/colors";
 
-const Header = ({ titulo, producto = null, categoriaElegida, navigation, route}) => {
-
-  categoriaElegida && console.log('hola');
+const Header = ({ titulo, categoriaElegida}) => {
 
   return (
     <View style={styles.container}>
@@ -26,7 +23,7 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
-    paddingBottom: 10,
+    paddingVertical: 10,
     width: "100%",
     backgroundColor: colors.primario,
     justifyContent: "center",
@@ -35,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.textoClaro,
     fontSize: 28,
-    fontFamily: "OswaldMedium",
+    fontFamily: "TituloMedium",
     marginBottom: 5,
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: { width: -1, height: 2 },

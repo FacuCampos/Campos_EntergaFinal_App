@@ -1,26 +1,32 @@
-import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+  Text,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-import data from "../data/categories.json";
+import { useGetCategoriesQuery } from "../services/shopServices";
 
-const formatData = (data, numColumns) => {
-  const numberOfFullRows = Math.floor(data.length / numColumns);
+const formatData = (catData, numColumns) => {
+  const newData = [...catData];
 
-  let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
+  const numberOfFullRows = Math.floor(newData.length / numColumns);
 
-  while (
-    numberOfElementsLastRow !== numColumns &&
-    numberOfElementsLastRow !== 0
-  ) {
-    data.push("vacio");
+  let numberOfElementsLastRow = newData.length - numberOfFullRows * numColumns;
+
+  while (numberOfElementsLastRow!== numColumns && numberOfElementsLastRow!== 0) {
+    newData.push({ nombre: "vacio" });
     numberOfElementsLastRow = numberOfElementsLastRow + 1;
   }
-
-  return data;
+  return newData;
 };
 
-const CategoryList = ({ navigation, route }) => {
+const CategoryList = ({ navigation }) => {
+  const { data } = useGetCategoriesQuery();
+
   const { width, height } = useWindowDimensions();
   const [orientacion, setOrientacion] = useState("portrait");
   const [key, setKey] = useState("flatListPortrait");
@@ -37,6 +43,12 @@ const CategoryList = ({ navigation, route }) => {
 
   const numColumns = orientacion === "portrait" ? 2 : 4;
 
+  if (!data) {
+    return (
+        <Text>Loading...</Text>
+    );
+  }
+
   return (
     <FlatList
       key={key}
@@ -44,13 +56,15 @@ const CategoryList = ({ navigation, route }) => {
       numColumns={numColumns}
       columnWrapperStyle={{ gap: 10, paddingHorizontal: 12 }}
       contentContainerStyle={{ gap: 10, paddingBottom: 20, paddingTop: 10 }}
-      keyExtractor={(categoria, idx) => categoria + idx}
+      keyExtractor={(categoria, idx) => categoria.nombre + idx}
       showsVerticalScrollIndicator={false}
       renderItem={({ item }) => {
-        if (item == "vacio") {
+        if (item.nombre === "vacio") {
           return <View style={styles.itemInvisible} />;
         } else {
-          return <Card categoriaElegida={item} navigation={navigation}/>;
+          return (
+            <Card categoriaElegida={item} navigation={navigation} />
+          );
         }
       }}
     />

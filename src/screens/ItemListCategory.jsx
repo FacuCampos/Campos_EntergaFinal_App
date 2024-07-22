@@ -9,11 +9,11 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import productos from "../data/products.json";
 import { Search, ProductItem } from "../components";
 import { colors } from "../global/colors";
 
 import { Ionicons } from "@expo/vector-icons";
+import { useGetProductsByCategoryQuery } from "../services/shopServices";
 
 const anchoPantalla = Dimensions.get("screen").width;
 
@@ -24,6 +24,12 @@ const ItemListCategory = ({ navigation, route }) => {
   const [error, setError] = useState("");
 
   const { categoriaElegida } = route.params;
+
+  const {
+    data: productsFetched,
+    error: errorFetched,
+    isLoading,
+  } = useGetProductsByCategoryQuery(categoriaElegida.nombre);
 
   const [portrait, setPortrait] = useState(null);
   const [key, setKey] = useState("flatListPortrait");
@@ -36,15 +42,15 @@ const ItemListCategory = ({ navigation, route }) => {
   }, [width, height]);
 
   useEffect(() => {
-    const productosPreFiltrados = productos.filter(
-      (prod) => prod.categoria === categoriaElegida.nombre
-    );
+    if (!isLoading) {
+      const filtroProductos = productsFetched.filter((prod) =>
+        prod.titulo.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
+      );
 
-    const filtroProductos = productosPreFiltrados.filter((prod) =>
-      prod.titulo.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
-    );
+      setProductosFiltrados(filtroProductos);
+      setError("");
+    }
 
-    setProductosFiltrados(filtroProductos);
     /* const regexDigits = /\d/;
   const hasDigits = regexDigits.test(keyword);
   if (hasDigits) {
@@ -58,7 +64,7 @@ const ItemListCategory = ({ navigation, route }) => {
     setError("Escribe 3 o más caracteres");
     return;
   } */
-  }, [keyword, categoriaElegida]);
+  }, [keyword, categoriaElegida, productsFetched, isLoading]);
 
   return (
     <View style={portrait ? styles.container : styles.containerLandscape}>
@@ -130,25 +136,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.terceario,
     paddingBottom: 10,
     overflow: "hidden",
-    
+
     shadowColor: "black",
     shadowOffset: {
-      width: 4,
-      height: 4,
+      width: 0,
+      height: 2,
     },
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.5,
     shadowRadius: 4.65,
-    elevation: 4,
+    elevation: 2,
   },
   iconBack: {
     paddingHorizontal: 10,
-    top: 5
+    top: 5,
   },
   catTitulo: {
     fontSize: 30,
     textAlign: "center",
-    fontFamily: "OswaldMedium",
+    fontFamily: "TituloMedium",
     textAlignVertical: "center",
     width: anchoPantalla - 88,
-  }
+  },
 });

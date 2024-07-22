@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setCategorySelected } from "../features/Shop/ShopSlice";
 
 const Card = ({ categoriaElegida, navigation }) => {
+
   const dispatch = useDispatch();
 
   const handleNavigate = () => {
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 28,
-    fontFamily: "PlayfairDisplayBold",
+    fontFamily: "SecundariaBold",
     color: colors.textoClaro,
     textShadowColor: colors.textoOscuro,
     textShadowOffset: { width: -1, height: 1 },

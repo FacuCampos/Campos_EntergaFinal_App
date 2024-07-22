@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   titulo: {
-    fontFamily: "OswaldMedium",
+    fontFamily: "TituloMedium",
     fontSize: 18,
   },
   texto: {

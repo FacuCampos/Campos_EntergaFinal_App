@@ -12,7 +12,8 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 
-import productos from "../data/products.json";
+import { useGetProductByIdQuery } from "../services/shopServices";
+
 import { colors } from "../global/colors";
 import { Counter } from "../components";
 
@@ -23,20 +24,12 @@ const ItemDetail = ({ navigation, route }) => {
 
   const [orientacion, setOrientacion] = useState("portrait");
 
-  const [producto, setProducto] = useState(null);
+  const {data: producto, isLoading} = useGetProductByIdQuery(productoElegido.id)
 
   useEffect(() => {
     if (width > height) setOrientacion("landscape");
     else setOrientacion("portrait");
   }, [width, height]);
-
-  useEffect(() => {
-    const productoSeleccionado = productos.find(
-      (prod) => prod.id === productoElegido.id
-    );
-
-    setProducto(productoSeleccionado);
-  }, [productoElegido]);
 
   return (
     <ScrollView StickyHeaderComponent={Pressable} style={styles.container}>
@@ -140,7 +133,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 24,
     lineHeight: 28,
-    fontFamily: "OswaldMedium",
+    fontFamily: "TituloMedium",
     flex: 1
   },
   buttons: {
