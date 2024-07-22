@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { setItemSelected } from "../features/Shop/ShopSlice";
 
 const anchoPantalla = Dimensions.get("window").width;
-const anchoTexto = anchoPantalla - 190;
+const anchoTexto = anchoPantalla - 200;
 const anchoTextoLandscape = anchoPantalla / 2 - 210;
 const anchoPressableLandscape = anchoPantalla / 2 - 30;
 
@@ -90,9 +90,10 @@ const styles = StyleSheet.create({
   texto: {
     color: colors.fondo,
     width: anchoTexto,
-    marginLeft: 10,
+    marginLeft: 20,
     fontSize: 18,
     fontWeight: "bold",
+    lineHeight: 24
   },
   textoLandscape: {
     color: colors.fondo,

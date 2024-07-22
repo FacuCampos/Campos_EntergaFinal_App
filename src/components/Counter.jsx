@@ -3,10 +3,9 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  Pressable,
+  View
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { colors } from "../global/colors";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     fontSize: 16,
-    colro: colors.terceario,
+    color: colors.textoOscuro,
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 8,

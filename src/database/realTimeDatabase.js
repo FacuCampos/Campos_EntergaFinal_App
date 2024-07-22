@@ -1,0 +1,1 @@
+export const baseUrl = 'https://rtk-prueba-default-rtdb.firebaseio.com/';
