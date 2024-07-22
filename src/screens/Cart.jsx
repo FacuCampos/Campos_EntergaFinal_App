@@ -25,7 +25,7 @@ const Cart = () => {
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>
           <Text style={{ fontWeight: "bold" }}>Total: </Text>
-          {"$ " + total.toLocaleString().replace(",", ".")}
+          {"$ " + total.toLocaleString('es')}
         </Text>
         <Pressable style={styles.confirmarPressable}>
           <Text style={styles.confirmarTexto}>Confirmar orden</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
   },
   totalContainer: {
-    backgroundColor: colors.terceario,
+    backgroundColor: colors.textoClaro,
     padding: 20,
     alignItems: "center",
     gap: 20,

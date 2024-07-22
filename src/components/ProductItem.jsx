@@ -10,9 +10,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { colors } from "../global/colors";
 
+import { useDispatch } from "react-redux";
+import { setItemSelected } from "../features/Shop/ShopSlice";
+
 const anchoPantalla = Dimensions.get("window").width;
 const anchoTexto = anchoPantalla - 190;
-const anchoTextoLandscape = (anchoPantalla/2) - 210
+const anchoTextoLandscape = anchoPantalla / 2 - 210;
 const anchoPressableLandscape = anchoPantalla / 2 - 30;
 
 const ProductItem = ({ producto, navigation }) => {
@@ -23,9 +26,17 @@ const ProductItem = ({ producto, navigation }) => {
     setPortrait(width < height);
   }, [width, height]);
 
+
+  const dispatch = useDispatch();
+
+  const handleNavigate = () => {
+    dispatch(setItemSelected(producto.titulo))
+    navigation.navigate("ItemDetail", { productoElegido: producto });
+  }
+
   return (
     <Pressable
-      onPress={() => {navigation.navigate('ItemDetail', {productoElegido: producto})}}
+      onPress={handleNavigate}
       style={
         portrait
           ? styles.pressable
@@ -94,5 +105,5 @@ const styles = StyleSheet.create({
     height: "100%",
     width: 140,
     marginLeft: 20,
-  }
+  },
 });

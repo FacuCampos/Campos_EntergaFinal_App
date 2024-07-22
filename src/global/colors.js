@@ -1,8 +1,10 @@
 export const colors = {
-    primario: 'teal',
-    secundario: '#009977',
-    terceario: 'lightgrey',
-    fondo: "#EDF1D6",
+    primario: '#bb4430',
+    secundario: '#e09f3e',
+    terceario: '#a6e1fa',
+    fondo: "#fefae0",
     cards: "#dce1de",
-    focusedIcon: '#1d3557'
+    focusedIcon: '#231f20',
+    textoClaro: '#f4f4f4',
+    textoOscuro: '#040404'
 }

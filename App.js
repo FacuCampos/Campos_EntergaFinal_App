@@ -2,9 +2,12 @@ import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 
 import { useFonts } from "expo-font";
 
-import { colors } from "./src/global/colors";
-
 import Navigator from "./src/navigation/Navigator";
+
+import { Provider } from "react-redux";
+import store from "./src/store";
+
+import { colors } from "./src/global/colors";
 
 export default function App() {
   const [fontsLoaded, fontsError] = useFonts({
@@ -19,14 +22,16 @@ export default function App() {
     return null;
   }
   return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-          translucent={true}
-          backgroundColor="transparent"
-        />
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        translucent={true}
+        backgroundColor="transparent"
+      />
+      <Provider store={store}>
         <Navigator />
-      </SafeAreaView>
+      </Provider>
+    </SafeAreaView>
   );
 }
 

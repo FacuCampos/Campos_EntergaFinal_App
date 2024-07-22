@@ -10,14 +10,16 @@ import {
   Dimensions,
 } from "react-native";
 
+import { Ionicons } from "@expo/vector-icons";
+
 import productos from "../data/products.json";
 import { colors } from "../global/colors";
+import { Counter } from "../components";
 
 const ItemDetail = ({ navigation, route }) => {
-
   const { width, height } = useWindowDimensions();
 
-  const {productoElegido} = route.params
+  const { productoElegido } = route.params;
 
   const [orientacion, setOrientacion] = useState("portrait");
 
@@ -29,7 +31,6 @@ const ItemDetail = ({ navigation, route }) => {
   }, [width, height]);
 
   useEffect(() => {
-    //Encontrar el producto por su id
     const productoSeleccionado = productos.find(
       (prod) => prod.id === productoElegido.id
     );
@@ -38,16 +39,25 @@ const ItemDetail = ({ navigation, route }) => {
   }, [productoElegido]);
 
   return (
-    <ScrollView
-      StickyHeaderComponent={Pressable}
-      style={styles.container} >
+    <ScrollView StickyHeaderComponent={Pressable} style={styles.container}>
+      {producto && orientacion === "portrait" && (
+        <View style={styles.detailTitulo}>
+          <Pressable
+            style={styles.iconBack}
+            onPress={() => navigation.goBack()}
+          >
+            <Ionicons name="arrow-back-circle" size={30} color="black" />
+          </Pressable>
+          <Text style={styles.titulo}>{producto.titulo}</Text>
+        </View>
+      )}
 
       {producto && (
         <View
           style={
             orientacion === "portrait"
               ? styles.prodContainer
-              : {...styles.prodContainer, ...styles.prodContainerLandscape}
+              : { ...styles.prodContainer, ...styles.prodContainerLandscape }
           }
         >
           <Image
@@ -64,19 +74,33 @@ const ItemDetail = ({ navigation, route }) => {
                 : styles.textContainerLandscape
             }
           >
-            <View style={
-              orientacion === 'portrait'
-              ? styles.textBox
-              : styles.textBoxLandscape}>
-              <Text style={styles.titulo}>{producto.titulo}</Text>
+            <View
+              style={
+                orientacion === "portrait"
+                  ? styles.textBox
+                  : styles.textBoxLandscape
+              }
+            >
+              {orientacion !== "portrait" && (
+                <Text style={styles.titulo}>{producto.titulo}</Text>
+              )}
               <Text style={styles.descripcion}>{producto.descripcion}</Text>
-              <Text style={styles.price}>${producto.precio.toLocaleString('es')}</Text>
+              <Text style={styles.price}>
+                ${producto.precio.toLocaleString("es")}
+              </Text>
             </View>
-            <Pressable style={
-              orientacion === "portrait"
-                ? {...styles.buttons, ...styles.buttonAdd }
-                : {...styles.buttons, ...styles.buttonAdd, ...styles.buttonAddLandscape}
-            }>
+            <Counter />
+            <Pressable
+              style={
+                orientacion === "portrait"
+                  ? { ...styles.buttons, ...styles.buttonAdd }
+                  : {
+                      ...styles.buttons,
+                      ...styles.buttonAdd,
+                      ...styles.buttonAddLandscape,
+                    }
+              }
+            >
               <Text style={styles.buttonText}> + Añadir al carrito</Text>
             </Pressable>
           </View>
@@ -93,11 +117,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.fondo,
   },
+  detailTitulo: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.cards,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    overflow: "hidden",
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4.65,
+    elevation: 2,
+  },
+  iconBack: {
+    marginRight: 15,
+  },
+  titulo: {
+    fontSize: 24,
+    lineHeight: 28,
+    fontFamily: "OswaldMedium",
+    flex: 1
+  },
   buttons: {
     backgroundColor: colors.secundario,
     paddingVertical: 15,
     paddingHorizontal: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonText: {
     fontSize: 20,
@@ -128,13 +178,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: Dimensions.get('window').width - 30,
-    height: Dimensions.get('window').width - 30,
+    width: Dimensions.get("window").width - 30,
+    height: Dimensions.get("window").width - 30,
     minWidth: 150,
   },
   imageLandscape: {
     width: "30%",
-    height: (Dimensions.get('window').width - 30) * 30/100,
+    height: ((Dimensions.get("window").width - 30) * 30) / 100,
     minWidth: 150,
     borderRadius: 10,
     borderColor: "black",
@@ -143,7 +193,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: "column",
     marginTop: 20,
-    gap: 20
+    gap: 10,
   },
   textContainerLandscape: {
     flex: 1,
@@ -156,7 +206,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "start",
-    gap: 20,
     paddingHorizontal: 20,
   },
   textBoxLandscape: {
@@ -167,26 +216,22 @@ const styles = StyleSheet.create({
     gap: 20,
     paddingHorizontal: 10,
   },
-  titulo: {
-    fontSize: 24,
-    lineHeight: 30,
-    fontFamily: 'OswaldMedium'
-  },
-  descripcion:{
+  descripcion: {
     fontSize: 16,
     textAlign: "justify",
-    lineHeight: 24
+    lineHeight: 24,
   },
   price: {
     textAlign: "right",
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    marginVertical: 10
   },
   buttonAdd: {
-    justifyContent: 'center'
+    justifyContent: "center",
   },
   buttonAddLandscape: {
     borderRadius: 10,
-    marginHorizontal: 10
-  }
+    marginHorizontal: 10,
+  },
 });

@@ -37,7 +37,7 @@ const ItemListCategory = ({ navigation, route }) => {
 
   useEffect(() => {
     const productosPreFiltrados = productos.filter(
-      (prod) => prod.categoria === categoriaElegida
+      (prod) => prod.categoria === categoriaElegida.nombre
     );
 
     const filtroProductos = productosPreFiltrados.filter((prod) =>
@@ -67,8 +67,8 @@ const ItemListCategory = ({ navigation, route }) => {
           <Ionicons name="arrow-back-circle" size={30} color="black" />
         </Pressable>
         <Text style={styles.catTitulo}>
-          {categoriaElegida.charAt(0).toUpperCase() +
-            categoriaElegida.slice(1).toLowerCase()}
+          {categoriaElegida.nombre.charAt(0).toUpperCase() +
+            categoriaElegida.nombre.slice(1).toLowerCase()}
         </Text>
       </View>
       <Search

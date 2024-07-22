@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   titulo: {
     textAlign: 'center',
-    color: colors.fondo,
+    color: colors.textoClaro,
     fontSize: 28,
     fontFamily: "OswaldMedium",
     marginBottom: 5,

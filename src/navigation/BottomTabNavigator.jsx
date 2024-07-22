@@ -43,7 +43,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <Entypo name="shop" size={24} color={focused ? colors.focusedIcon :colors.fondo} />
+                <Entypo name="shop" size={24} color={focused ? colors.focusedIcon :colors.textoClaro} />
               </View>
             );
           }
@@ -56,7 +56,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <Entypo name="shopping-cart" size={24} color={focused ? colors.focusedIcon :colors.fondo} />
+                <Entypo name="shopping-cart" size={24} color={focused ? colors.focusedIcon :colors.textoClaro} />
               </View>
             );
           },
@@ -69,7 +69,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <FontAwesome6 name="receipt" size={24} color={focused ? colors.focusedIcon :colors.fondo} />
+                <FontAwesome6 name="receipt" size={24} color={focused ? colors.focusedIcon :colors.textoClaro} />
               </View>
             );
           },

@@ -1,6 +1,7 @@
 export {default as Card} from './Card'
 export {default as CartItem} from './CartItem'
 export {default as CategoryList} from './CategoryList'
+export {default as Counter} from './Counter'
 export {default as Header} from './Header'
 export {default as ProductItem} from './ProductItem'
 export {default as Search} from './Search'
