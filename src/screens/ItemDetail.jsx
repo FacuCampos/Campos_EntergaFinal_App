@@ -8,6 +8,7 @@ import {
   View,
   useWindowDimensions,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -16,20 +17,32 @@ import { useGetProductByIdQuery } from "../services/shopServices";
 
 import { colors } from "../global/colors";
 import { Counter } from "../components";
+import { useDispatch, useSelector } from "react-redux";
+import { addCartItem } from "../features/Cart/CartSlice";
 
 const ItemDetail = ({ navigation, route }) => {
   const { width, height } = useWindowDimensions();
 
   const { productoElegido } = route.params;
 
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
   const [orientacion, setOrientacion] = useState("portrait");
 
-  const {data: producto, isLoading} = useGetProductByIdQuery(productoElegido.id)
+  const { data: producto, isLoading } = useGetProductByIdQuery(
+    productoElegido.id
+  );
 
   useEffect(() => {
     if (width > height) setOrientacion("landscape");
     else setOrientacion("portrait");
   }, [width, height]);
+
+  const handleAgregarCarrito = () => {
+    dispatch(addCartItem);
+    dispatch(addCartItem({...producto, cantidad: 1}))
+  };
 
   return (
     <ScrollView StickyHeaderComponent={Pressable} style={styles.container}>
@@ -83,7 +96,7 @@ const ItemDetail = ({ navigation, route }) => {
               </Text>
             </View>
             <Counter />
-            <Pressable
+            <TouchableOpacity
               style={
                 orientacion === "portrait"
                   ? { ...styles.buttons, ...styles.buttonAdd }
@@ -93,9 +106,11 @@ const ItemDetail = ({ navigation, route }) => {
                       ...styles.buttonAddLandscape,
                     }
               }
+              onPress={handleAgregarCarrito}
+              disabled={count <= 0}
             >
               <Text style={styles.buttonText}> + Añadir al carrito</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       )}
@@ -134,7 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 28,
     fontFamily: "TituloMedium",
-    flex: 1
+    flex: 1,
   },
   buttons: {
     backgroundColor: colors.secundario,
@@ -218,7 +233,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontSize: 24,
     fontWeight: "bold",
-    marginVertical: 10
+    marginVertical: 10,
   },
   buttonAdd: {
     justifyContent: "center",

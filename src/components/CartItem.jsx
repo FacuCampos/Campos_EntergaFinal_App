@@ -7,21 +7,21 @@ const CartItem = ({ cartItem }) => {
   return (
     <View style={styles.card}>
       <View style={styles.textContainer}>
-        <Text style={styles.titulo}>{cartItem.title}</Text>
+        <Text style={styles.titulo}>{cartItem.titulo}</Text>
         <Text style={styles.texto}>
           <Text style={{ fontWeight: "bold" }}>Cantidad: </Text>
-          {cartItem.quantity}
+          {cartItem.cantidad}
         </Text>
         <Text style={styles.texto}>
-          <Text style={{ fontWeight: "bold" }}>Marca: </Text> {cartItem.brand}
+          <Text style={{ fontWeight: "bold" }}>Marca: </Text> {cartItem.marca}
         </Text>
         <Text style={styles.texto}>
           <Text style={{ fontWeight: "bold" }}>Precio unitario: </Text>
-          {cartItem.price}
+          {cartItem.precio}
         </Text>
         <Text style={styles.texto}>
           <Text style={{ fontWeight: "bold" }}>Subtotal: </Text>
-          {cartItem.price * cartItem.quantity}
+          {cartItem.precio * cartItem.cantidad}
         </Text>
       </View>
       <MaterialCommunityIcons name="trash-can" size={30} color="black" />

@@ -1,15 +1,25 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { colors } from "../global/colors";
 
-import cartData from "../data/cart.json";
 import { CartItem } from "../components";
+import { useDispatch, useSelector } from "react-redux";
+import { usePostOrderMutation } from "../services/shopServices";
+import { deleteCart } from "../features/Cart/CartSlice";
+
 
 const Cart = () => {
-  const total = cartData.reduce(
-    (acc, item) => (acc += item.price * item.quantity),
-    0
-  );
+
+  const {items: cartData, total} = useSelector((state) => state.cart.value)
+
+  const [triggerPostOrder, result] = usePostOrderMutation()
+
+  const dispatch = useDispatch()
+
+  const confirmarOrden = () => {
+    triggerPostOrder({items: cartData, user: 'Facu', total});
+    dispatch(deleteCart())
+  }
 
   return (
     <View style={styles.container}>
@@ -25,11 +35,11 @@ const Cart = () => {
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>
           <Text style={{ fontWeight: "bold" }}>Total: </Text>
-          {"$ " + total.toLocaleString('es')}
+          {total ? "$ " + total.toLocaleString('es') : "$ 0"}
         </Text>
-        <Pressable style={styles.confirmarPressable}>
+        <TouchableOpacity style={styles.confirmarPressable} onPress={confirmarOrden}>
           <Text style={styles.confirmarTexto}>Confirmar orden</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );
