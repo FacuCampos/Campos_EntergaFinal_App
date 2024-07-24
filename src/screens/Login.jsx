@@ -1,23 +1,40 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { colors } from "../global/colors";
 
 import { InputForm, SubmitButton } from "../components";
+import { useSignInMutation } from "../services/authServices";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/User/UserSlice";
 
 const Login = ({ navigation }) => {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [triggerSingIn, result] = useSignInMutation()
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(result.isSuccess){
+      dispatch(setUser({
+        email: result.data.email,
+        idToken: result.data.idToken
+      }))
+    }
+  }, [result])
+
   const onSubmit = () => {
-    //Login
+    triggerSingIn({email, password, returnSecureToken: true})
   };
 
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title}>Login to start</Text>
+        <Text style={styles.title}>Inicia sesión</Text>
+        <View style={styles.hr}></View>
         <InputForm label={"Email"} onChange={setEmail} error={""} />
         <InputForm
           label={"Password"}
@@ -26,10 +43,10 @@ const Login = ({ navigation }) => {
           isSecure={true}
         />
         <SubmitButton onPress={onSubmit} title="Enviar" />
-        <Text style={styles.sub}>Not have an account?</Text>
+        <Text style={styles.sub}>¿No tiene una cuenta aún?</Text>
         
         <Pressable onPress={() => navigation.navigate("Signup")}>
-          <Text style={styles.subLink}>Signup</Text>
+          <Text style={styles.subLink}>Regístrate</Text>
         </Pressable>
       </View>
     </View>
@@ -43,28 +60,43 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.primario
+    backgroundColor: colors.fondo
   },
   container: {
     width: "90%",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.terceario,
+    backgroundColor: colors.primario,
     gap: 15,
-    paddingVertical: 20,
+    padding: 20,
     borderRadius: 10,
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4.65,
+    elevation: 4,
   },
   title: {
-    fontSize: 22,
-    fontFamily: "TituloMedium",
+    fontSize: 30,
+    fontFamily: "TituloFont",
+    color: colors.textoClaro
+  },
+  hr:{
+    height: 1,
+    width: '95%',
+    backgroundColor: '#000',
+    opacity: 0.3,
   },
   sub: {
     fontSize: 14,
-    color: "black",
+    color: colors.textoClaro,
   },
   subLink: {
     fontSize: 14,
-    color: "blue",
+    color: colors.textoClaro,
+    textDecorationLine:"underline"
   },
 });

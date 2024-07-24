@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   HomeStackNavigator,
@@ -8,31 +8,26 @@ import {
 import { Header } from "../components";
 import { colors } from "../global/colors";
 import { Entypo } from "@expo/vector-icons";
-import { FontAwesome6 } from '@expo/vector-icons';
-import { useEffect } from "react";
+import { FontAwesome6 } from "@expo/vector-icons";
+import MyProfileStackNavigator from "./MyProfileStackNavigator";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
-
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         header: () => {
-
-          return (
-            <Header
-              titulo={
-                route.name 
-              }
-              route={route}
-            />
-          );
+          return <Header titulo={route.name} route={route} />;
         },
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: colors.primario,
-          height: 60,
+          height: 70,
+          padding: 5
+/*           borderRadius: 10,
+          marginHorizontal: 10,
+          marginBottom: 10 */
         },
       })}
     >
@@ -43,10 +38,14 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <Entypo name="shop" size={24} color={focused ? colors.focusedIcon :colors.textoClaro} />
+                <Entypo
+                  name="shop"
+                  size={28}
+                  color={focused ? colors.focusedIcon : colors.textoClaro}
+                />
               </View>
             );
-          }
+          },
         }}
       />
       <Tab.Screen
@@ -56,7 +55,11 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <Entypo name="shopping-cart" size={24} color={focused ? colors.focusedIcon :colors.textoClaro} />
+                <Entypo
+                  name="shopping-cart"
+                  size={28}
+                  color={focused ? colors.focusedIcon : colors.textoClaro}
+                />
               </View>
             );
           },
@@ -69,7 +72,28 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ focused }) => {
             return (
               <View>
-                <FontAwesome6 name="receipt" size={24} color={focused ? colors.focusedIcon :colors.textoClaro} />
+                <FontAwesome6
+                  name="receipt"
+                  size={28}
+                  color={focused ? colors.focusedIcon : colors.textoClaro}
+                />
+              </View>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={MyProfileStackNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View>
+                <FontAwesome6
+                  name="user-large"
+                  size={28}
+                  color={focused ? colors.focusedIcon : colors.textoClaro}
+                />
               </View>
             );
           },
@@ -80,7 +104,3 @@ const BottomTabNavigator = () => {
 };
 
 export default BottomTabNavigator;
-
-const styles = StyleSheet.create({});
-
-/* statusBarColor: colors.primario */

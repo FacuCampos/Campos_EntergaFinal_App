@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.textoClaro,
     fontSize: 28,
-    fontFamily: "TituloMedium",
+    fontFamily: "TituloFont",
     marginBottom: 5,
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: { width: -1, height: 2 },

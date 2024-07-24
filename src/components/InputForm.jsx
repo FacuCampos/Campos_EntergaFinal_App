@@ -28,30 +28,32 @@ export default InputForm;
 const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: "column",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     alignItems: "center",
     width: "100%",
   },
   subtitle: {
     width: "90%",
     fontSize: 16,
-    fontFamily: "SecundariaBold",
+    fontFamily: "SecundariaFontBold",
+    color: colors.textoClaro,
+    textAlign: 'center'
   },
   error: {
     paddintTop: 2,
     fontSize: 16,
-    color: "red",
-    fontFamily: "SecundariaRegular",
-    fontStyle: "italic",
+    color: "white",
+    fontFamily: "InputFont",
   },
   input: {
     width: "90%",
     borderWidth: 0,
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     borderBottomColor: colors.secundario,
     padding: 2,
-    fontFamily: "SecundariaRegular",
+    fontFamily: "InputFontItalic",
     fontSize: 14,
+    textAlign: 'center'
   },
 });
 

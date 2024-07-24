@@ -1,21 +1,27 @@
-import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 import { useFonts } from "expo-font";
 
 import Navigator from "./src/navigation/Navigator";
 
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./src/store";
 
 import { colors } from "./src/global/colors";
+import { MyStatusBar } from "./src/components";
 
 export default function App() {
   const [fontsLoaded, fontsError] = useFonts({
-    TituloLight: require("./assets/fonts/Oswald/Oswald-Light.ttf"),
-    TituloMedium: require("./assets/fonts/Oswald/Oswald-Medium.ttf"),
-    TituloBold: require("./assets/fonts/Oswald/Oswald-Bold.ttf"),
-    SecundariaRegular: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Regular.ttf"),
-    SecundariaBold: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Bold.ttf"),
+    TituloFont: require("./assets/fonts/Oswald/Oswald-Regular.ttf"),
+    TituloFontLight: require("./assets/fonts/Oswald/Oswald-Light.ttf"),
+    TituloFontBold: require("./assets/fonts/Oswald/Oswald-Bold.ttf"),
+    SecundariaFont: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Regular.ttf"),
+    SecundariaFontItalic: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Italic.ttf"),
+    SecundariaFontBold: require("./assets/fonts/PlayFair_Display/PlayfairDisplay-Bold.ttf"),
+    InputFont: require("./assets/fonts/Poppins/Poppins-Regular.ttf"),
+    InputFontItalic: require("./assets/fonts/Poppins/Poppins-Italic.ttf"),
+    InputFontLigth: require("./assets/fonts/Poppins/Poppins-Light.ttf"),
+    InputFontBold: require("./assets/fonts/Poppins/Poppins-Bold.ttf"),
   });
 
   if (!fontsLoaded && !fontsError) {
@@ -23,12 +29,8 @@ export default function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        translucent={true}
-        backgroundColor="transparent"
-      />
       <Provider store={store}>
+        <MyStatusBar/>
         <Navigator />
       </Provider>
     </SafeAreaView>

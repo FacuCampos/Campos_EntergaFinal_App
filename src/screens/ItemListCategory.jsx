@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   catTitulo: {
     fontSize: 30,
     textAlign: "center",
-    fontFamily: "TituloMedium",
+    fontFamily: "TituloFont",
     textAlignVertical: "center",
     width: anchoPantalla - 88,
   },

@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 28,
-    fontFamily: "SecundariaBold",
+    fontFamily: "SecundariaFontBold",
     color: colors.textoClaro,
     textShadowColor: colors.textoOscuro,
     textShadowOffset: { width: -1, height: 1 },

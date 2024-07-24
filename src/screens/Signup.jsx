@@ -1,46 +1,44 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useEffect, useState } from "react";
-import { SubmitButton , InputForm } from "../components";
+import { SubmitButton, InputForm } from "../components";
 import { colors } from "../global/colors";
 import { useSignUpMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/User/UserSlice";
 
 const Signup = ({ navigation }) => {
-  
   const [email, setEmail] = useState("");
   const [errorMail, setErrorMail] = useState("");
-  
+
   const [password, setPassword] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
 
-  const dispatch = useDispatch()
-  const [triggerSignUp, result] = useSignUpMutation()
+  const dispatch = useDispatch();
+  const [triggerSignUp, result] = useSignUpMutation();
 
-  useEffect(()=>{
+  useEffect(() => {
     if (result.isSuccess) {
       dispatch(
         setUser({
           email: result.data.email,
-          idToken: result.data.idToken
+          idToken: result.data.idToken,
         })
-      )
+      );
     }
-  }, [result])
-  
+  }, [result]);
+
   const onSubmit = () => {
-    triggerSignUp({email, password, returnSecureToken: true})
+    triggerSignUp({ email, password, returnSecureToken: true });
   };
-
-
 
   return (
     <View style={styles.main}>
       <View style={styles.container}>
         <Text style={styles.title}>Signup</Text>
+        <View style={styles.hr}></View>
         <InputForm label={"Email"} onChange={setEmail} error={errorMail} />
         <InputForm
           label={"Password"}
@@ -69,32 +67,46 @@ export default Signup;
 
 const styles = StyleSheet.create({
   main: {
-    width: "100%",
-    height: "100%",
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.fondo,
   },
   container: {
     width: "90%",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.terceario,
+    backgroundColor: colors.primario,
     gap: 15,
-    paddingVertical: 20,
+    padding: 20,
     borderRadius: 10,
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4.65,
+    elevation: 4,
   },
   title: {
-    fontSize: 22,
-    fontFamily: "TituloMedium",
+    fontSize: 30,
+    fontFamily: "TituloFont",
+    color: colors.textoClaro,
+  },
+  hr: {
+    height: 1,
+    width: "95%",
+    backgroundColor: "#000",
+    opacity: 0.3,
   },
   sub: {
     fontSize: 14,
-    fontFamily: "SecundariaRegular",
-    color: "black",
+    color: colors.textoClaro,
   },
   subLink: {
     fontSize: 14,
-    color: "blue",
+    color: colors.textoClaro,
+    textDecorationLine: "underline",
   },
 });

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../global/colors'
 
@@ -20,10 +20,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 8,
         width: "60%",
+        marginTop: 20
     },
     text: {
-      color: colors.textoOscuro,
-      fontFamily: "SecundariaRegular",
-      fontSize: 22,
+      color: colors.textoClaro,
+      fontFamily: "InputFont",
+      fontSize: 20,
+      top: Platform.OS === 'android' ? 3 : 0
     },
 })

@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 24,
     lineHeight: 28,
-    fontFamily: "TituloMedium",
+    fontFamily: "TituloFont",
     flex: 1,
   },
   buttons: {
