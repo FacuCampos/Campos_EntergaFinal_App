@@ -14,9 +14,8 @@ import { useGetProfileImageQuery } from "../services/shopServices";
 const MyProfile = ({ navigation }) => {
   const { imageCamera, localId } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
-  const launchCamera = async () => {
-    navigation.navigate("ImageSelector");
-  };
+
+  console.log(imageFromBase)
 
   const defaultImageRoute = "../../assets/userIcon.png";
 

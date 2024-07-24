@@ -20,13 +20,12 @@ import {
 
 const ImageSelector = ({ navigation }) => {
   const [imagen, setImagen] = useState(null);
-  const [isImageFromCamera, setIsImageFromCamera] = useState(false);
 
   const dispatch = useDispatch();
 
-  const [triggerPostImage, result] = usePostProfileImageMutation();
+  const [triggerPostImage, result] = usePostProfileImageMutation();;
   const { localId } = useSelector((state) => state.auth.value);
-  const {data: imageFromBase} = useGetProfileImageQuery(localId)
+  const { data: imageFromBase } = useGetProfileImageQuery(localId);
 
   const verifyCameraPermission = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -37,20 +36,31 @@ const ImageSelector = ({ navigation }) => {
     }
   };
 
-  const pickImage = async () => {
+  const pickImage = async (camara) => {
     const isCameraOk = await verifyCameraPermission();
-    setIsImageFromCamera(true)
     if (isCameraOk) {
-      let result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [1, 1],
-        base64: true,
-        quality: 0.2,
-      });
-
-      if (!result.canceled) {
-        setImagen(`data:image/jpeg;base64,${result.assets[0].base64}`);
+      if (camara == true) {
+        let result = await ImagePicker.launchCameraAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [1, 1],
+          base64: true,
+          quality: 0.2,
+        });
+        if (!result.canceled) {
+          setImagen(`data:image/jpeg;base64,${result.assets[0].base64}`);
+        }
+      } else {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [1, 1],
+          base64: true,
+          quality: 0.2,
+        });
+        if (!result.canceled) {
+          setImagen(`data:image/jpeg;base64,${result.assets[0].base64}`);
+        }
       }
     }
   };
@@ -64,6 +74,8 @@ const ImageSelector = ({ navigation }) => {
       console.log(error);
     }
   };
+
+  const defaultImageRoute = "../../assets/userIcon.png";
 
   return (
     <View style={styles.container}>
@@ -81,9 +93,18 @@ const ImageSelector = ({ navigation }) => {
               styles.btn,
               { opacity: pressed ? 0.8 : 1 },
             ]}
-            onPress={pickImage}
+            onPress={() => pickImage(true)}
           >
             <Text style={styles.btnTexto}>Tomar nueva foto</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.btn,
+              { opacity: pressed ? 0.8 : 1 },
+            ]}
+            onPress={() => pickImage(false)}
+          >
+            <Text style={styles.btnTexto}>Subir nueva foto</Text>
           </Pressable>
           <Pressable
             onPress={confirmImage}
@@ -98,16 +119,38 @@ const ImageSelector = ({ navigation }) => {
       ) : (
         <>
           <View style={styles.containerPhoto}>
-            <Text>No hay foto para mostrar</Text>
+            <Image
+              style={styles.img}
+              resizeMode="cover"
+              source={require(defaultImageRoute)}
+            />
           </View>
           <Pressable
             style={({ pressed }) => [
               styles.btn,
               { opacity: pressed ? 0.8 : 1 },
             ]}
-            onPress={pickImage}
+            onPress={() => pickImage(true)}
           >
             <Text style={styles.btnTexto}>Tomar una foto</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.btn,
+              { opacity: pressed ? 0.8 : 1 },
+            ]}
+            onPress={() => pickImage(false)}
+          >
+            <Text style={styles.btnTexto}>Seleccionar desde galería</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [
+              styles.btn,
+              { opacity: pressed ? 0.8 : 1 },
+            ]}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={styles.btnTexto}>Cancelar</Text>
           </Pressable>
         </>
       )}
