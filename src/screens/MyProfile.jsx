@@ -6,34 +6,41 @@ import {
   Text,
   View,
 } from "react-native";
-import { useState } from "react";
+import { useSelector } from "react-redux";
+
 import { colors } from "../global/colors";
+import { useGetProfileImageQuery } from "../services/shopServices";
 
 const MyProfile = ({ navigation }) => {
-  const [imagen, setImagen] = useState(null);
+  const { imageCamera, localId } = useSelector((state) => state.auth.value);
+  const { data: imageFromBase } = useGetProfileImageQuery(localId);
+  const launchCamera = async () => {
+    navigation.navigate("ImageSelector");
+  };
+
+  const defaultImageRoute = "../../assets/userIcon.png";
 
   return (
     <View style={styles.container}>
-      {imagen ? null : (
-        <>
-          <View style={styles.imgContainer}>
-            <Image
-              style={styles.imagen}
-              resizeMode="cover"
-              source={require("../../assets/userIcon.png")}
-            />
-          </View>
-          <Pressable
-            onPress={() => navigation.navigate("ImageSelector")}
-            style={({ pressed }) => [
-              styles.btn,
-              { opacity: pressed ? 0.8 : 1 },
-            ]}
-          >
-            <Text style={styles.btnTexto}>Agregar foto de perfil</Text>
-          </Pressable>
-        </>
-      )}
+      <View style={styles.imgContainer}>
+        <Image
+          style={styles.imagen}
+          resizeMode="cover"
+          source={
+            imageCamera
+              ? { uri: imageFromBase?.image || imageCamera }
+              : require(defaultImageRoute)
+          }
+        />
+      </View>
+      <Pressable
+        onPress={() => navigation.navigate("ImageSelector")}
+        style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.8 : 1 }]}
+      >
+        <Text style={styles.btnTexto}>
+          { imageCamera ? "Cambiar imagen" : "Agregar foto de perfil"}
+        </Text>
+      </Pressable>
     </View>
   );
 };
@@ -50,11 +57,11 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     borderRadius: 100,
-    backgroundColor: '#050505',
-    borderColor: '#8f8f8f',
+    backgroundColor: "#050505",
+    borderColor: "#8f8f8f",
     borderWidth: 2,
 
-    overflow: 'hidden',
+    overflow: "hidden",
 
     shadowOffset: {
       width: 0,

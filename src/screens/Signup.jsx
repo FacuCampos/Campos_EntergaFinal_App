@@ -5,6 +5,7 @@ import { colors } from "../global/colors";
 import { useSignUpMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/User/UserSlice";
+import { signupSchema } from "../validations/singupSchema";
 
 const Signup = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -25,13 +26,38 @@ const Signup = ({ navigation }) => {
         setUser({
           email: result.data.email,
           idToken: result.data.idToken,
+          localId: result.data.localId
         })
       );
     }
   }, [result]);
 
   const onSubmit = () => {
-    triggerSignUp({ email, password, returnSecureToken: true });
+    try {
+      setErrorMail("");
+      setErrorPassword("");
+      setErrorConfirmPassword("");
+      signupSchema.validateSync({
+        email,
+        password,
+        confirmPassword,
+      });
+      triggerSignUp({ email, password, returnSecureToken: true });
+    } catch (error) {
+      switch (error.path) {
+        case "email":
+          setErrorMail(error.message);
+          break;
+        case "password":
+          setErrorPassword(error.message);
+          break;
+        case "confirmPassword":
+          setErrorConfirmPassword(error.message);
+          break;
+        default:
+          break;
+      }
+    }
   };
 
   return (
