@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {ImageSelector, MyProfile} from "../screens";
+import {ImageSelector, ListAddress, LocationSelector, MyProfile} from "../screens";
 
 
 const Stack = createNativeStackNavigator()
@@ -13,6 +13,8 @@ const MyProfileStackNavigator = () => {
         }}>
             <Stack.Screen name='MyProfile' component={MyProfile}/>
             <Stack.Screen name='ImageSelector' component={ImageSelector}/>
+            <Stack.Screen name="ListAddress" component={ListAddress} />
+            <Stack.Screen name="LocationSelector" component={LocationSelector} />
         </Stack.Navigator>
     )
 }

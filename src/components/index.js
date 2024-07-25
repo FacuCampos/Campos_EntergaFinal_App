@@ -1,5 +1,4 @@
-import StatusBar from './MyStatusBar'
-
+export {default as AddressItem} from './AddressItem'
 export {default as Card} from './Card'
 export {default as CartItem} from './CartItem'
 export {default as CategoryList} from './CategoryList'

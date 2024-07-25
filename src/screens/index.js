@@ -3,6 +3,8 @@ export {default as HomeScreen} from './Home';
 export {default as ImageSelector} from './ImageSelector'
 export {default as ItemDetail} from './ItemDetail';
 export {default as ItemListCategory} from './ItemListCategory';
+export {default as ListAddress} from './ListAddress';
+export {default as LocationSelector} from './LocationSelector';
 export {default as Login} from './Login'
 export {default as MyProfile} from './MyProfile'
 export {default as Order} from './Order'

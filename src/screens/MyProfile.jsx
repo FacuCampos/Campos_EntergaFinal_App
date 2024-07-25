@@ -15,9 +15,11 @@ const MyProfile = ({ navigation }) => {
   const { imageCamera, localId } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
 
-  console.log(imageFromBase)
-
   const defaultImageRoute = "../../assets/userIcon.png";
+
+  const launchLocation = async () => {
+    navigation.navigate("ListAddress");
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +39,15 @@ const MyProfile = ({ navigation }) => {
         style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.8 : 1 }]}
       >
         <Text style={styles.btnTexto}>
-          { imageCamera ? "Cambiar imagen" : "Agregar foto de perfil"}
+          {imageCamera ? "Cambiar imagen" : "Agregar foto de perfil"}
+        </Text>
+      </Pressable>
+      <Pressable
+        onPress={launchLocation}
+        style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.8 : 1 }]}
+      >
+        <Text style={styles.btnTexto}>
+          Seleccionar ubicación
         </Text>
       </Pressable>
     </View>
