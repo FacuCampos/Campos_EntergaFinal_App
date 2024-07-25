@@ -1,4 +1,11 @@
-import { FlatList, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { colors } from "../global/colors";
 
@@ -7,19 +14,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePostOrderMutation } from "../services/shopServices";
 import { deleteCart } from "../features/Cart/CartSlice";
 
-
 const Cart = () => {
+  const { items: cartData, total } = useSelector((state) => state.cart.value);
 
-  const {items: cartData, total} = useSelector((state) => state.cart.value)
+  const [triggerPostOrder, result] = usePostOrderMutation();
 
-  const [triggerPostOrder, result] = usePostOrderMutation()
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const confirmarOrden = () => {
-    triggerPostOrder({items: cartData, user: 'Facu', total});
-    dispatch(deleteCart())
-  }
+
+    const date = new Date()
+
+    triggerPostOrder({
+      items: cartData,
+      user: "mail@mail.com",
+      total,
+      date: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+    });
+    dispatch(deleteCart());
+  };
 
   return (
     <View style={styles.container}>
@@ -35,9 +48,12 @@ const Cart = () => {
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>
           <Text style={{ fontWeight: "bold" }}>Total: </Text>
-          {total ? "$ " + total.toLocaleString('es') : "$ 0"}
+          {total ? "$ " + total.toLocaleString("es") : "$ 0"}
         </Text>
-        <TouchableOpacity style={styles.confirmarPressable} onPress={confirmarOrden}>
+        <TouchableOpacity
+          style={styles.confirmarPressable}
+          onPress={confirmarOrden}
+        >
           <Text style={styles.confirmarTexto}>Confirmar orden</Text>
         </TouchableOpacity>
       </View>
@@ -52,16 +68,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.fondo,
     justifyContent: "space-between",
-
   },
   totalContainer: {
     backgroundColor: colors.textoClaro,
     padding: 20,
     alignItems: "center",
     gap: 20,
-    borderTopColor: 'grey',
+    borderTopColor: "grey",
     borderTopWidth: 2,
-    
   },
   totalText: {
     fontSize: 24,
@@ -71,7 +85,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
-    shadowColor: 'black',
+    shadowColor: "black",
     shadowOffset: {
       width: 2,
       height: 2,
@@ -82,7 +96,7 @@ const styles = StyleSheet.create({
   },
   confirmarTexto: {
     fontSize: 16,
-    color: '#fff',
-    fontWeight: 'bold'
-  }
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });

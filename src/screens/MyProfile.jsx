@@ -6,12 +6,17 @@ import {
   Text,
   View,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { colors } from "../global/colors";
 import { useGetProfileImageQuery } from "../services/shopServices";
+import { clearUser } from "../features/User/UserSlice";
+import { truncateSession } from "../persistence";
 
 const MyProfile = ({ navigation }) => {
+
+  const dispatch = useDispatch()
+
   const { imageCamera, localId } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
 
@@ -20,6 +25,18 @@ const MyProfile = ({ navigation }) => {
   const launchLocation = async () => {
     navigation.navigate("ListAddress");
   };
+
+  const signOut = async () => {
+    try {
+      console.log('entre al try')
+      const response = await truncateSession()
+      console.log(response)
+      dispatch(clearUser())
+      console.log("deslogeado")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -50,6 +67,15 @@ const MyProfile = ({ navigation }) => {
           Seleccionar ubicación
         </Text>
       </Pressable>
+      <Pressable
+        onPress={signOut}
+        style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.8 : 1 }]}
+      >
+        <Text style={styles.btnTexto}>
+          Cerrar sesión
+        </Text>
+      </Pressable>
+
     </View>
   );
 };

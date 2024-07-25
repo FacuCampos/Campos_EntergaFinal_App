@@ -64,7 +64,7 @@ const LocationSelector = ({ navigation }) => {
           latitude: location.latitude,
           longitude: location.longitude,
           address,
-          updatedAt: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+          updatedAt: `${date.getDate}/${date.getMonth()}/${date.getFullYear()}`
         },
         localId
       });

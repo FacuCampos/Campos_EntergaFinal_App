@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
 import { useGetCategoriesQuery } from "../services/shopServices";
+import Loading from "./Loading";
 
 const formatData = (catData, numColumns) => {
   const newData = [...catData];
@@ -45,7 +46,7 @@ const CategoryList = ({ navigation }) => {
 
   if (!data) {
     return (
-        <Text>Loading...</Text>
+        <Loading />
     );
   }
 

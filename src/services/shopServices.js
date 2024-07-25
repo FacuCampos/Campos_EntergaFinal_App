@@ -4,7 +4,7 @@ import { baseUrl } from "../database/realTimeDatabase";
 export const shopApi = createApi({
   reducerPath: "shopApi",
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
-  tagTypes: ['profileImageGet', 'locationGet'],
+  tagTypes: ["profileImageGet", "locationGet"],
   endpoints: (builder) => ({
     getCategories: builder.query({
       query: () => `categories.json`,
@@ -26,43 +26,49 @@ export const shopApi = createApi({
     }),
     postOrder: builder.mutation({
       query: ({ ...order }) => ({
-        url: "order.json",
+        url: "orders.json",
         method: "POST",
         body: order,
       }),
     }),
+    getOrdersByUser: builder.query({
+      query: (user) => `orders.json?orderBy="user"&equalTo="${user}"`,
+      transformResponse: (res) => {
+        const transformedResponse = Object.values(res);
+        return transformedResponse;
+      },
+    }),
     getProfileImage: builder.query({
-      query: (localId )=> `profileImages/${localId}.json`, 
-      providesTags: ["profileImageGet"]
+      query: (localId) => `profileImages/${localId}.json`,
+      providesTags: ["profileImageGet"],
     }),
     postProfileImage: builder.mutation({
-      query: ({image, localId}) => ({
+      query: ({ image, localId }) => ({
         url: `profileImages/${localId}.json`,
         method: "PUT",
         body: {
-          image: image
+          image: image,
         },
       }),
-      invalidatesTags: ['profileImageGet'],
+      invalidatesTags: ["profileImageGet"],
     }),
     getLocation: builder.query({
-      query: (localId )=> `locations/${localId}.json`, 
-      providesTags: ["locationGet"]
+      query: (localId) => `locations/${localId}.json`,
+      providesTags: ["locationGet"],
     }),
     postLocation: builder.mutation({
-      query: ({location, localId}) => ({
+      query: ({ location, localId }) => ({
         url: `locations/${localId}.json`,
         method: "PUT",
         body: {
           latitude: location.latitude,
           longitude: location.longitude,
           address: location.address,
-          updatedAt: location.updatedAt
+          updatedAt: location.updatedAt,
         },
       }),
-      invalidatesTags: ['locationGet'],
+      invalidatesTags: ["locationGet"],
     }),
-
   }),
 });
 
@@ -71,8 +77,9 @@ export const {
   useGetProductsByCategoryQuery,
   useGetProductByIdQuery,
   usePostOrderMutation,
+  useGetOrdersByUserQuery,
   useGetProfileImageQuery,
   usePostProfileImageMutation,
   useGetLocationQuery,
-  usePostLocationMutation
+  usePostLocationMutation,
 } = shopApi;

@@ -7,28 +7,39 @@ import { InputForm, SubmitButton } from "../components";
 import { useSignInMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/User/UserSlice";
+import { insertSession } from "../persistence";
 
 const Login = ({ navigation }) => {
-  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [triggerSingIn, result] = useSignInMutation()
+  const [triggerSingIn, result] = useSignInMutation();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if(result.isSuccess){
-      dispatch(setUser({
+    console.log(result)
+    if (result?.data && result.isSuccess) {
+      insertSession({
+        localId: result.data.localId,
         email: result.data.email,
-        idToken: result.data.idToken,
-        localId: result.data.localId
-      }))
+        token: result.data.idToken,
+      }).then((response) => {
+        dispatch(
+          setUser({
+            localId: result.data.localId,
+            email: result.data.email,
+            idToken: result.data.idToken,
+          })
+        );
+      });
+    } else {
+      console.log('error al logearse')
     }
-  }, [result])
+  }, [result]);
 
   const onSubmit = () => {
-    triggerSingIn({email, password, returnSecureToken: true})
+    triggerSingIn({ email, password, returnSecureToken: true });
   };
 
   return (
@@ -45,7 +56,7 @@ const Login = ({ navigation }) => {
         />
         <SubmitButton onPress={onSubmit} title="Enviar" />
         <Text style={styles.sub}>¿No tiene una cuenta aún?</Text>
-        
+
         <Pressable onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.subLink}>Regístrate</Text>
         </Pressable>
@@ -61,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.fondo
+    backgroundColor: colors.fondo,
   },
   container: {
     width: "90%",
@@ -83,12 +94,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontFamily: "TituloFont",
-    color: colors.textoClaro
+    color: colors.textoClaro,
   },
-  hr:{
+  hr: {
     height: 1,
-    width: '95%',
-    backgroundColor: '#000',
+    width: "95%",
+    backgroundColor: "#000",
     opacity: 0.3,
   },
   sub: {
@@ -98,6 +109,6 @@ const styles = StyleSheet.create({
   subLink: {
     fontSize: 14,
     color: colors.textoClaro,
-    textDecorationLine:"underline"
+    textDecorationLine: "underline",
   },
 });

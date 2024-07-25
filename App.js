@@ -10,6 +10,18 @@ import store from "./src/store";
 import { colors } from "./src/global/colors";
 import { MyStatusBar } from "./src/components";
 
+import { initSQLiteDB } from "./src/persistence";
+
+(async () => {
+  try {
+    const response = await initSQLiteDB();
+    console.log({ responseCreatingDB: response });
+    console.log("DB inicialized");
+  } catch (error) {
+    console.log({errorCreatingDB: error})
+  }
+})();
+
 export default function App() {
   const [fontsLoaded, fontsError] = useFonts({
     TituloFont: require("./assets/fonts/Oswald/Oswald-Regular.ttf"),
@@ -30,7 +42,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Provider store={store}>
-        <MyStatusBar/>
+        <MyStatusBar />
         <Navigator />
       </Provider>
     </SafeAreaView>

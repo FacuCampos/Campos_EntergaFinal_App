@@ -19,6 +19,7 @@ import { colors } from "../global/colors";
 import { Counter } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from "../features/Cart/CartSlice";
+import { resetCounter } from "../features/Counter/CounterSlice";
 
 const ItemDetail = ({ navigation, route }) => {
   const { width, height } = useWindowDimensions();
@@ -40,9 +41,14 @@ const ItemDetail = ({ navigation, route }) => {
   }, [width, height]);
 
   const handleAgregarCarrito = () => {
-    dispatch(addCartItem);
-    dispatch(addCartItem({...producto, cantidad: 1}))
+    dispatch(addCartItem({...producto, cantidad: count}))
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCounter())
+    }
+  },[])
 
   return (
     <ScrollView StickyHeaderComponent={Pressable} style={styles.container}>

@@ -14,33 +14,31 @@ import { colors } from "../global/colors";
 
 import { Ionicons } from "@expo/vector-icons";
 import { useGetProductsByCategoryQuery } from "../services/shopServices";
+import Loading from "../components/Loading";
 
 const anchoPantalla = Dimensions.get("screen").width;
 
 const ItemListCategory = ({ navigation, route }) => {
   const [keyword, setKeyword] = useState("");
   const [productosFiltrados, setProductosFiltrados] = useState([]);
-
   const [error, setError] = useState("");
 
   const { categoriaElegida } = route.params;
-
   const {
     data: productsFetched,
     error: errorFetched,
     isLoading,
   } = useGetProductsByCategoryQuery(categoriaElegida.nombre);
 
+  const { width, height } = useWindowDimensions();
   const [portrait, setPortrait] = useState(null);
   const [key, setKey] = useState("flatListPortrait");
-
-  const { width, height } = useWindowDimensions();
-
+  
   useEffect(() => {
     setPortrait(width < height);
     setKey(width < height ? "flatListPortrait" : "flatListLandscape");
   }, [width, height]);
-
+  
   useEffect(() => {
     if (!isLoading) {
       const filtroProductos = productsFetched.filter((prod) =>
@@ -50,21 +48,15 @@ const ItemListCategory = ({ navigation, route }) => {
       setProductosFiltrados(filtroProductos);
       setError("");
     }
-
-    /* const regexDigits = /\d/;
-  const hasDigits = regexDigits.test(keyword);
-  if (hasDigits) {
-    setError("No uses dígitos");
-    return;
-  }
-
-  const regexThreeOrMoreCharacters = /[a-zA-Z]{3,}/;
-  const hasThreeOrMoreCharacters = regexThreeOrMoreCharacters.test(keyword);
-  if (!hasThreeOrMoreCharacters && keyword.length) {
-    setError("Escribe 3 o más caracteres");
-    return;
-  } */
   }, [keyword, categoriaElegida, productsFetched, isLoading]);
+
+  if (!productsFetched) {
+    return (
+      <View style={styles.container}>
+        <Loading />
+      </View>
+    );
+  }
 
   return (
     <View style={portrait ? styles.container : styles.containerLandscape}>
