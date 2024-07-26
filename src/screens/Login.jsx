@@ -5,13 +5,16 @@ import { colors } from "../global/colors";
 
 import { InputForm, SubmitButton } from "../components";
 import { useSignInMutation } from "../services/authServices";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../features/User/UserSlice";
 import { insertSession } from "../persistence";
+import { loginSchema } from "../validations/loginSchema";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [errorCredentials, setErrorCredentials] = useState("");
 
   const [triggerSingIn, result] = useSignInMutation();
 
@@ -35,12 +38,21 @@ const Login = ({ navigation }) => {
         });
       }
     } catch (error) {
-      console.log({errorLoginIn: error});
+      console.log({ errorLoginIn: error });
     }
   }, [result]);
 
   const onSubmit = () => {
-    triggerSingIn({ email, password, returnSecureToken: true });
+    try {
+      setErrorCredentials("");
+      loginSchema.validateSync({
+        email,
+        password,
+      });
+      triggerSingIn({ email, password, returnSecureToken: true });
+    } catch (error) {
+      setErrorCredentials(error.message);
+    }
   };
 
   return (
@@ -48,14 +60,15 @@ const Login = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.title}>Inicia sesión</Text>
         <View style={styles.hr}></View>
-        <InputForm label={"Email"} onChange={setEmail} error={""} />
-        <InputForm
-          label={"Password"}
-          onChange={setPassword}
-          error={""}
-          isSecure={true}
-        />
+        <InputForm label={"Email"} onChange={setEmail} />
+        <InputForm label={"Password"} onChange={setPassword} isSecure={true} />
+        
+        {errorCredentials != "" && (
+          <Text style={styles.errorCredenciales}>{errorCredentials}</Text>
+        )}
+        
         <SubmitButton onPress={onSubmit} title="Enviar" />
+        
         <Text style={styles.sub}>¿No tiene una cuenta aún?</Text>
 
         <Pressable onPress={() => navigation.navigate("Signup")}>
@@ -111,5 +124,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textoClaro,
     textDecorationLine: "underline",
+  },
+  errorCredenciales: {
+    paddintTop: 2,
+    fontSize: 16,
+    color: "white",
+    fontFamily: "InputFont",
   },
 });

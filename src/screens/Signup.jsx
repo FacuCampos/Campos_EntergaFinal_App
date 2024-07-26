@@ -26,7 +26,7 @@ const Signup = ({ navigation }) => {
         setUser({
           email: result.data.email,
           idToken: result.data.idToken,
-          localId: result.data.localId
+          localId: result.data.localId,
         })
       );
     }
@@ -37,21 +37,20 @@ const Signup = ({ navigation }) => {
       setErrorMail("");
       setErrorPassword("");
       setErrorConfirmPassword("");
-      signupSchema.validateSync({
-        email,
-        password,
-        confirmPassword,
-      });
+      signupSchema.validateSync({ email, password, confirmPassword });
       triggerSignUp({ email, password, returnSecureToken: true });
     } catch (error) {
       switch (error.path) {
         case "email":
+          console.log({errorEmail: error})
           setErrorMail(error.message);
           break;
         case "password":
+          console.log({errorPassword: error})
           setErrorPassword(error.message);
           break;
         case "confirmPassword":
+          console.log({errorConfirmPassword: error})
           setErrorConfirmPassword(error.message);
           break;
         default:
