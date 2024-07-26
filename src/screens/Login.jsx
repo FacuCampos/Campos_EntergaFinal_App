@@ -5,7 +5,7 @@ import { colors } from "../global/colors";
 
 import { InputForm, SubmitButton } from "../components";
 import { useSignInMutation } from "../services/authServices";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../features/User/UserSlice";
 import { insertSession } from "../persistence";
 
@@ -18,23 +18,24 @@ const Login = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(result)
-    if (result?.data && result.isSuccess) {
-      insertSession({
-        localId: result.data.localId,
-        email: result.data.email,
-        token: result.data.idToken,
-      }).then((response) => {
-        dispatch(
-          setUser({
-            localId: result.data.localId,
-            email: result.data.email,
-            idToken: result.data.idToken,
-          })
-        );
-      });
-    } else {
-      console.log('error al logearse')
+    try {
+      if (result?.data && result.isSuccess) {
+        insertSession({
+          localId: result.data.localId,
+          email: result.data.email,
+          token: result.data.idToken,
+        }).then((response) => {
+          dispatch(
+            setUser({
+              user: result.data.email,
+              token: result.data.idToken,
+              localId: result.data.localId,
+            })
+          );
+        });
+      }
+    } catch (error) {
+      console.log({errorLoginIn: error});
     }
   }, [result]);
 

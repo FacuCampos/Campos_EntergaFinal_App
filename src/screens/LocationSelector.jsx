@@ -33,7 +33,7 @@ const LocationSelector = ({ navigation }) => {
           });
         }
       } catch (err) {
-        console.log(err);
+        console.log({errorLocationRequest: err});
       }
     })();
   }, []);
@@ -49,7 +49,7 @@ const LocationSelector = ({ navigation }) => {
           setAddress(data.results[0].formatted_address);
         }
       } catch (err) {
-        console.log(err);
+        console.log({errorSetAddress: err});
       }
     })();
   }, [location]);
@@ -71,7 +71,7 @@ const LocationSelector = ({ navigation }) => {
   
       navigation.goBack()
     } catch (err) {
-      console.log(err)
+      console.log({errorPostUserLocation: err})
     }
   };
 

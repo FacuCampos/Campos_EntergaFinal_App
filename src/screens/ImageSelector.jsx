@@ -71,7 +71,7 @@ const ImageSelector = ({ navigation }) => {
       triggerPostImage({ imagen, localId });
       navigation.goBack();
     } catch (error) {
-      console.log(error);
+      console.log({errorSetImage: error});
     }
   };
 

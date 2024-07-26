@@ -18,7 +18,10 @@ const formatData = (catData, numColumns) => {
 
   let numberOfElementsLastRow = newData.length - numberOfFullRows * numColumns;
 
-  while (numberOfElementsLastRow!== numColumns && numberOfElementsLastRow!== 0) {
+  while (
+    numberOfElementsLastRow !== numColumns &&
+    numberOfElementsLastRow !== 0
+  ) {
     newData.push({ nombre: "vacio" });
     numberOfElementsLastRow = numberOfElementsLastRow + 1;
   }
@@ -30,29 +33,24 @@ const CategoryList = ({ navigation }) => {
 
   const { width, height } = useWindowDimensions();
   const [orientacion, setOrientacion] = useState("portrait");
-  const [key, setKey] = useState("flatListPortrait");
 
   useEffect(() => {
     if (width > height) {
       setOrientacion("landscape");
-      setKey("flatListLandscape");
     } else {
       setOrientacion("portrait");
-      setKey("flatListPortrait");
     }
   }, [width, height]);
 
   const numColumns = orientacion === "portrait" ? 2 : 4;
 
   if (!data) {
-    return (
-        <Loading />
-    );
+    return <Loading />;
   }
 
   return (
     <FlatList
-      key={key}
+      key={`key-${orientacion}`}
       data={formatData(data, numColumns)}
       numColumns={numColumns}
       columnWrapperStyle={{ gap: 10, paddingHorizontal: 12 }}
@@ -63,9 +61,7 @@ const CategoryList = ({ navigation }) => {
         if (item.nombre === "vacio") {
           return <View style={styles.itemInvisible} />;
         } else {
-          return (
-            <Card categoriaElegida={item} navigation={navigation} />
-          );
+          return <Card categoriaElegida={item} navigation={navigation} />;
         }
       }}
     />

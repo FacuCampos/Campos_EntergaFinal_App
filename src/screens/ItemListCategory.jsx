@@ -60,6 +60,7 @@ const ItemListCategory = ({ navigation, route }) => {
 
   return (
     <View style={portrait ? styles.container : styles.containerLandscape}>
+      
       <View style={styles.catTituloContainer}>
         <Pressable style={styles.iconBack} onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back-circle" size={30} color="black" />

@@ -1,7 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen, ItemListCategory, ItemDetail } from "../screens";
-import { colors } from "../global/colors";
-import { Header } from "../components";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,23 +17,3 @@ const HomeStackNavigator = () => {
 };
 
 export default HomeStackNavigator;
-
-/* 
-,
-        ({ route }) => ({
-          statusBarColor: colors.primario,
-          header: () => {
-            return (
-              <Header
-                titulo={
-                  route.name === "Home"
-                    ? "Categorias"
-                    : route.name === "ItemListCategory"
-                    ? route.params.categoriaElegida
-                    : "Detalle"
-                }
-              />
-            );
-          },
-        })
-*/

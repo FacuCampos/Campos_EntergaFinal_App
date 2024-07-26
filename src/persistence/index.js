@@ -37,7 +37,7 @@ export const getSession = () => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        "SELECT * from sessions",
+        "SELECT * FROM sessions",
         [],
         (_, result) => resolve(result),
         (_, error) => reject(error)
@@ -49,15 +49,15 @@ export const getSession = () => {
 
 // cerrar la sesion
 export const truncateSession = () => {
-    const promise = new Promise((resolve, reject) => {
-        db.transaction((tx) => {
-          tx.executeSql(
-            "DELETE from sessions",
-            [],
-            (_, result) => resolve(result),
-            (_, error) => reject(error)
-          );
-        });
-      });
-      return promise;
-}
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "DELETE FROM sessions",
+        [],
+        (_, result) => resolve(result),
+        (_, error) => reject(error)
+      );
+    });
+  });
+  return promise;
+};
