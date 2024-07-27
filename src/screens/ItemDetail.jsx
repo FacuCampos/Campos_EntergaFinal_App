@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
   Image,
-  Pressable,
   StyleSheet,
   Text,
   ScrollView,
   View,
   useWindowDimensions,
   Dimensions,
-  TouchableOpacity,
 } from "react-native";
-
-import { Ionicons } from "@expo/vector-icons";
 
 import { useGetProductByIdQuery } from "../services/shopServices";
 
 import { colors } from "../global/colors";
-import { Counter } from "../components";
+import { Counter, CustomButton, Loading, Subtitle } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from "../features/Cart/CartSlice";
 import { resetCounter } from "../features/Counter/CounterSlice";
@@ -41,27 +37,23 @@ const ItemDetail = ({ navigation, route }) => {
   }, [width, height]);
 
   const handleAgregarCarrito = () => {
-    dispatch(addCartItem({...producto, cantidad: count}))
+    dispatch(addCartItem({ ...producto, cantidad: count }));
   };
 
   useEffect(() => {
     return () => {
-      dispatch(resetCounter())
-    }
-  },[])
+      dispatch(resetCounter());
+    };
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
-    <ScrollView StickyHeaderComponent={Pressable} style={styles.container}>
+    <ScrollView>
       {producto && orientacion === "portrait" && (
-        <View style={styles.detailTitulo}>
-          <Pressable
-            style={styles.iconBack}
-            onPress={() => navigation.goBack()}
-          >
-            <Ionicons name="arrow-back-circle" size={30} color="black" />
-          </Pressable>
-          <Text style={styles.titulo}>{producto.titulo}</Text>
-        </View>
+        <Subtitle navigation={navigation} titulo={producto.titulo} />
       )}
 
       {producto && (
@@ -102,22 +94,26 @@ const ItemDetail = ({ navigation, route }) => {
               </Text>
             </View>
             <Counter />
-            <TouchableOpacity
-              style={
-                orientacion === "portrait"
-                  ? { ...styles.buttons, ...styles.buttonAdd }
-                  : {
-                      ...styles.buttons,
-                      ...styles.buttonAdd,
-                      ...styles.buttonAddLandscape,
-                    }
-              }
-              onPress={handleAgregarCarrito}
-              disabled={count <= 0}
-            >
-              <Text style={styles.buttonText}> + Añadir al carrito</Text>
-            </TouchableOpacity>
           </View>
+          <CustomButton
+            accion={handleAgregarCarrito}
+            texto="+ Añadir al carrito"
+            estilo={
+              orientacion === "portrait"
+                ? styles.buttonAdd
+                : {
+                    ...styles.buttonAdd,
+                    borderRadius: 10,
+                    marginHorizontal: 10,
+                  }
+            }
+            estiloTxt={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: colors.fondo,
+            }}
+            disabled={count <= 0}
+          />
         </View>
       )}
     </ScrollView>
@@ -127,46 +123,12 @@ const ItemDetail = ({ navigation, route }) => {
 export default ItemDetail;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.fondo,
-  },
-  detailTitulo: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.cards,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    overflow: "hidden",
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 4.65,
-    elevation: 2,
-  },
-  iconBack: {
-    marginRight: 15,
-  },
-  titulo: {
-    fontSize: 24,
-    lineHeight: 28,
-    fontFamily: "TituloFont",
-    flex: 1,
-  },
-  buttons: {
+  buttonAdd: {
     backgroundColor: colors.secundario,
     paddingVertical: 15,
     paddingHorizontal: 10,
     alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: colors.fondo,
+    justifyContent: "center",
   },
   prodContainer: {
     marginVertical: 20,
@@ -240,12 +202,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginVertical: 10,
-  },
-  buttonAdd: {
-    justifyContent: "center",
-  },
-  buttonAddLandscape: {
-    borderRadius: 10,
-    marginHorizontal: 10,
   },
 });

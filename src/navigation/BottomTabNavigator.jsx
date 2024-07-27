@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   HomeStackNavigator,
@@ -17,18 +17,9 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        header: () => {
-          return <Header titulo={route.name} route={route} />;
-        },
+        header: () => <Header titulo={route.name} route={route} />,
         tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: colors.primario,
-          height: 70,
-          padding: 5
-/*           borderRadius: 10,
-          marginHorizontal: 10,
-          marginBottom: 10 */
-        },
+        tabBarStyle: {backgroundColor: colors.primario, height: 70, padding: 5,}
       })}
     >
       <Tab.Screen

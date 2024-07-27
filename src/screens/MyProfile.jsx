@@ -12,6 +12,7 @@ import { colors } from "../global/colors";
 import { useGetProfileImageQuery } from "../services/shopServices";
 import { clearUser } from "../features/User/UserSlice";
 import { truncateSession } from "../persistence";
+import { CustomButton } from "../components";
 
 const MyProfile = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -30,62 +31,52 @@ const MyProfile = ({ navigation }) => {
       await truncateSession();
       dispatch(clearUser());
     } catch (error) {
-      console.log({errorClearUser: error});
+      console.log({ errorClearUser: error });
     }
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.imgContainer}>
         <Image
           style={styles.imagen}
           resizeMode="cover"
           source={
-            imageCamera
+            imageCamera || imageFromBase
               ? { uri: imageFromBase?.image || imageCamera }
               : require(defaultImageRoute)
           }
         />
       </View>
-      <Pressable
-        onPress={() => navigation.navigate("ImageSelector")}
-        style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.8 : 1 }]}
-      >
-        <Text style={styles.btnTexto}>
-          {imageCamera ? "Cambiar imagen" : "Agregar foto de perfil"}
-        </Text>
-      </Pressable>
-      <Pressable
-        onPress={launchLocation}
-        style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.8 : 1 }]}
-      >
-        <Text style={styles.btnTexto}>Seleccionar ubicación</Text>
-      </Pressable>
-      <Pressable
-        onPress={signOut}
-        style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.8 : 1 }]}
-      >
-        <Text style={styles.btnTexto}>Cerrar sesión</Text>
-      </Pressable>
-    </View>
+      <CustomButton
+        accion={() => navigation.navigate("ImageSelector")}
+        texto={imageCamera ? "Cambiar imagen" : "Agregar foto de perfil"}
+        estilo={styles.btn}
+      />
+      <CustomButton
+        accion={launchLocation}
+        texto="Seleccionar ubicación"
+        estilo={styles.btn}
+      />
+      <CustomButton
+        accion={signOut}
+        texto="Cerrar sesión"
+        estilo={styles.btn}
+      />
+    </>
   );
 };
 
 export default MyProfile;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.fondo,
-    alignItems: "center",
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-  },
   imgContainer: {
     borderRadius: 100,
     backgroundColor: "#050505",
     borderColor: "#8f8f8f",
     borderWidth: 2,
+    marginTop: 20,
+    marginBottom: 10,
 
     overflow: "hidden",
 

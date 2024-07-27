@@ -1,19 +1,25 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
-import {colors} from '../global/colors'
+import { colors } from "../global/colors";
 
-const InputForm = ({ label, onChange, error = "", isSecure = false }) => {
+const InputForm = ({
+  label,
+  onChange,
+  error = "",
+  isSecure = false,
+  estilo = styles.input,
+  estiloTxt = styles.label,
+}) => {
   const [input, setInput] = useState("");
   const onChangeText = (text) => {
-    setInput(text),
-    onChange(text);
+    setInput(text), onChange(text);
   };
 
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.subtitle}>{label}</Text>
+      <Text style={estiloTxt}>{label}</Text>
       <TextInput
-        style={styles.input}
+        style={estilo}
         value={input}
         onChangeText={onChangeText}
         secureTextEntry={isSecure}
@@ -32,12 +38,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
   },
-  subtitle: {
+  label: {
     width: "90%",
     fontSize: 16,
     fontFamily: "SecundariaFontBold",
     color: colors.textoClaro,
-    textAlign: 'center'
+    textAlign: "center",
   },
   error: {
     paddintTop: 2,
@@ -53,7 +59,6 @@ const styles = StyleSheet.create({
     padding: 2,
     fontFamily: "InputFontItalic",
     fontSize: 14,
-    textAlign: 'center'
+    textAlign: "center",
   },
 });
-

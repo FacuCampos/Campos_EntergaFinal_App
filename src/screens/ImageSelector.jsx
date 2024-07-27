@@ -1,29 +1,22 @@
 import { useState } from "react";
-import {
-  Image,
-  Platform,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Platform, StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as ImagePicker from "expo-image-picker";
 
-import { colors } from "../global/colors";
 import { setCameraImage } from "../features/User/UserSlice";
 import {
   useGetProfileImageQuery,
   usePostProfileImageMutation,
 } from "../services/shopServices";
+import CustomButton from "../components/CustomButton";
 
 const ImageSelector = ({ navigation }) => {
   const [imagen, setImagen] = useState(null);
 
   const dispatch = useDispatch();
 
-  const [triggerPostImage, result] = usePostProfileImageMutation();;
+  const [triggerPostImage, result] = usePostProfileImageMutation();
   const { localId } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
 
@@ -71,7 +64,7 @@ const ImageSelector = ({ navigation }) => {
       triggerPostImage({ imagen, localId });
       navigation.goBack();
     } catch (error) {
-      console.log({errorSetImage: error});
+      console.log({ errorSetImage: error });
     }
   };
 
@@ -79,81 +72,35 @@ const ImageSelector = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {imagen || imageFromBase ? (
-        <>
-          <View style={styles.imgContainer}>
-            <Image
-              style={styles.img}
-              resizeMode="cover"
-              source={{ uri: imagen || imageFromBase?.imagen }}
-            />
-          </View>
-          <Pressable
-            style={({ pressed }) => [
-              styles.btn,
-              { opacity: pressed ? 0.8 : 1 },
-            ]}
-            onPress={() => pickImage(true)}
-          >
-            <Text style={styles.btnTexto}>Tomar nueva foto</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [
-              styles.btn,
-              { opacity: pressed ? 0.8 : 1 },
-            ]}
-            onPress={() => pickImage(false)}
-          >
-            <Text style={styles.btnTexto}>Subir nueva foto</Text>
-          </Pressable>
-          <Pressable
-            onPress={confirmImage}
-            style={({ pressed }) => [
-              styles.btn,
-              { opacity: pressed ? 0.8 : 1 },
-            ]}
-          >
-            <Text style={styles.btnTexto}>Confirmar foto</Text>
-          </Pressable>
-        </>
-      ) : (
-        <>
-          <View style={styles.containerPhoto}>
-            <Image
-              style={styles.img}
-              resizeMode="cover"
-              source={require(defaultImageRoute)}
-            />
-          </View>
-          <Pressable
-            style={({ pressed }) => [
-              styles.btn,
-              { opacity: pressed ? 0.8 : 1 },
-            ]}
-            onPress={() => pickImage(true)}
-          >
-            <Text style={styles.btnTexto}>Tomar una foto</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [
-              styles.btn,
-              { opacity: pressed ? 0.8 : 1 },
-            ]}
-            onPress={() => pickImage(false)}
-          >
-            <Text style={styles.btnTexto}>Seleccionar desde galería</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [
-              styles.btn,
-              { opacity: pressed ? 0.8 : 1 },
-            ]}
-            onPress={() => navigation.goBack()}
-          >
-            <Text style={styles.btnTexto}>Cancelar</Text>
-          </Pressable>
-        </>
-      )}
+      <View style={styles.imgContainer}>
+        <Image
+          style={styles.img}
+          resizeMode="cover"
+          source={
+            imagen || imageFromBase
+              ? { uri: imageFromBase?.image || imagen }
+              : require(defaultImageRoute)
+          }
+        />
+      </View>
+      <CustomButton
+        accion={() => pickImage(true)}
+        texto={imagen || imageFromBase ? "Tomar nueva foto" : "Tomar una foto"}
+      />
+      <CustomButton
+        accion={() => pickImage(false)}
+        texto={
+          imagen || imageFromBase
+            ? "Subir nueva foto"
+            : "Seleccionar desde galería"
+        }
+      />
+      <CustomButton
+        accion={
+          imagen || imageFromBase ? confirmImage : () => navigation.goBack()
+        }
+        texto={imagen || imageFromBase ? "Confirmar foto" : "Cancelar"}
+      />
     </View>
   );
 };
@@ -163,25 +110,8 @@ export default ImageSelector;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.fondo,
-    alignItems: "center",
-    paddingHorizontal: 10,
     paddingVertical: 20,
-  },
-  btn: {
-    backgroundColor: colors.secundario,
-    width: "70%",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    marginTop: 10,
-  },
-  btnTexto: {
-    color: colors.textoClaro,
-    fontFamily: "InputFontBold",
-    top: Platform.OS === "android" ? 3 : 0,
+    paddingHorizontal: 15,
   },
   imgContainer: {
     borderRadius: 100,
@@ -204,15 +134,5 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: "center",
     alignItems: "center",
-  },
-  containerPhoto: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    overflow: "hidden",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.cards,
-    borderWidth: 1,
   },
 });

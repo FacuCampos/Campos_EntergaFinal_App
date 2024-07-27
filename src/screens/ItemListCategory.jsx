@@ -1,22 +1,10 @@
-import {
-  Dimensions,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { Dimensions, FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
 import React, { useEffect, useState } from "react";
 
-import { Search, ProductItem } from "../components";
-import { colors } from "../global/colors";
+import { Search, ProductItem, Subtitle } from "../components";
 
-import { Ionicons } from "@expo/vector-icons";
 import { useGetProductsByCategoryQuery } from "../services/shopServices";
 import Loading from "../components/Loading";
-
-const anchoPantalla = Dimensions.get("screen").width;
 
 const ItemListCategory = ({ navigation, route }) => {
   const [keyword, setKeyword] = useState("");
@@ -33,12 +21,12 @@ const ItemListCategory = ({ navigation, route }) => {
   const { width, height } = useWindowDimensions();
   const [portrait, setPortrait] = useState(null);
   const [key, setKey] = useState("flatListPortrait");
-  
+
   useEffect(() => {
     setPortrait(width < height);
     setKey(width < height ? "flatListPortrait" : "flatListLandscape");
   }, [width, height]);
-  
+
   useEffect(() => {
     if (!isLoading) {
       const filtroProductos = productsFetched.filter((prod) =>
@@ -51,25 +39,27 @@ const ItemListCategory = ({ navigation, route }) => {
   }, [keyword, categoriaElegida, productsFetched, isLoading]);
 
   if (!productsFetched) {
-    return (
-      <View style={styles.container}>
-        <Loading />
-      </View>
-    );
+    return <Loading />;
   }
+
+  const anchoPantalla = Dimensions.get("screen").width;
 
   return (
     <View style={portrait ? styles.container : styles.containerLandscape}>
-      
-      <View style={styles.catTituloContainer}>
-        <Pressable style={styles.iconBack} onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back-circle" size={30} color="black" />
-        </Pressable>
-        <Text style={styles.catTitulo}>
-          {categoriaElegida.nombre.charAt(0).toUpperCase() +
-            categoriaElegida.nombre.slice(1).toLowerCase()}
-        </Text>
-      </View>
+      <Subtitle
+        navigation={navigation}
+        titulo={
+          categoriaElegida.nombre.charAt(0).toUpperCase() +
+          categoriaElegida.nombre.slice(1).toLowerCase()
+        }
+        estilo={{
+          fontSize: 30,
+          textAlign: "center",
+          fontFamily: "TituloFont",
+          textAlignVertical: "center",
+          width: anchoPantalla - 130,
+        }}
+      />
       <Search
         error={error}
         onSearch={setKeyword}
@@ -107,47 +97,12 @@ export default ItemListCategory;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.fondo,
-    width: "100%",
-    flex: 1,
-    flexDirection: "column",
     alignItems: "center",
   },
   containerLandscape: {
-    width: "100%",
-    flex: 1,
     marginTop: 20,
-    flexDirection: "column",
     paddingHorizontal: 0,
     marginHorizontal: 10,
     gap: 20,
-  },
-  catTituloContainer: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.terceario,
-    paddingBottom: 10,
-    overflow: "hidden",
-
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4.65,
-    elevation: 2,
-  },
-  iconBack: {
-    paddingHorizontal: 10,
-    top: 5,
-  },
-  catTitulo: {
-    fontSize: 30,
-    textAlign: "center",
-    fontFamily: "TituloFont",
-    textAlignVertical: "center",
-    width: anchoPantalla - 88,
   },
 });

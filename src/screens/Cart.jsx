@@ -1,6 +1,5 @@
 import {
   FlatList,
-  Pressable,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,7 +8,7 @@ import {
 import React from "react";
 import { colors } from "../global/colors";
 
-import { CartItem } from "../components";
+import { CartItem, CustomButton } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { usePostOrderMutation } from "../services/shopServices";
 import { deleteCart } from "../features/Cart/CartSlice";
@@ -22,8 +21,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const confirmarOrden = () => {
-
-    const date = new Date()
+    const date = new Date();
 
     triggerPostOrder({
       items: cartData,
@@ -35,7 +33,7 @@ const Cart = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <FlatList
         data={cartData}
         keyExtractor={(producto) => producto.id}
@@ -50,25 +48,20 @@ const Cart = () => {
           <Text style={{ fontWeight: "bold" }}>Total: </Text>
           {total ? "$ " + total.toLocaleString("es") : "$ 0"}
         </Text>
-        <TouchableOpacity
-          style={styles.confirmarPressable}
-          onPress={confirmarOrden}
-        >
-          <Text style={styles.confirmarTexto}>Confirmar orden</Text>
-        </TouchableOpacity>
+        <CustomButton
+          accion={confirmarOrden}
+          texto={"Confirmar orden"}
+          estilo={styles.confirmarPressable}
+          disabled={cartData.length ? false : true}
+        />
       </View>
-    </View>
+    </>
   );
 };
 
 export default Cart;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.fondo,
-    justifyContent: "space-between",
-  },
   totalContainer: {
     backgroundColor: colors.textoClaro,
     padding: 20,

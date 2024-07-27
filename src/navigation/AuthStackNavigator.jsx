@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {Login,Signup} from "../screens";
+import { colors } from "../global/colors";
+import { StyleSheet } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -8,7 +10,8 @@ const AuthStackNavigator = () => {
     <Stack.Navigator
       initialRouteName="Login"
       screenOptions={{
-        headerShown: false
+        contentStyle: styles.navigator,
+        headerShown: false,
       }}
     >
         <Stack.Screen component={Login} name='Login'/>
@@ -18,3 +21,12 @@ const AuthStackNavigator = () => {
 };
 
 export default AuthStackNavigator;
+
+const styles = StyleSheet.create({
+  navigator: {
+    backgroundColor: colors.fondo,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  }
+})

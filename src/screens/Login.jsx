@@ -1,11 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { colors } from "../global/colors";
+import { InputForm, SubmitButton, RegisterForm } from "../components";
 
-import { InputForm, SubmitButton } from "../components";
 import { useSignInMutation } from "../services/authServices";
-import { useDispatch } from "react-redux";
 import { setUser } from "../features/User/UserSlice";
 import { insertSession } from "../persistence";
 import { loginSchema } from "../validations/loginSchema";
@@ -56,65 +56,29 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.main}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Inicia sesión</Text>
-        <View style={styles.hr}></View>
+      <RegisterForm titulo={'Inicia sesión'}>
         <InputForm label={"Email"} onChange={setEmail} />
-        <InputForm label={"Password"} onChange={setPassword} isSecure={true} />
-        
+        <InputForm label={"Contraseña"} onChange={setPassword} isSecure={true} />
         {errorCredentials != "" && (
           <Text style={styles.errorCredenciales}>{errorCredentials}</Text>
-        )}
-        
+        )} 
         <SubmitButton onPress={onSubmit} title="Enviar" />
-        
         <Text style={styles.sub}>¿No tiene una cuenta aún?</Text>
-
         <Pressable onPress={() => navigation.navigate("Signup")}>
           <Text style={styles.subLink}>Regístrate</Text>
         </Pressable>
-      </View>
-    </View>
+      </RegisterForm>
   );
 };
 
 export default Login;
 
 const styles = StyleSheet.create({
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.fondo,
-  },
-  container: {
-    width: "90%",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.primario,
-    gap: 15,
-    padding: 20,
-    borderRadius: 10,
-    shadowOffset: {
-      width: 4,
-      height: 4,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 4.65,
-    elevation: 4,
-  },
-  title: {
-    fontSize: 30,
-    fontFamily: "TituloFont",
-    color: colors.textoClaro,
-  },
-  hr: {
-    height: 1,
-    width: "95%",
-    backgroundColor: "#000",
-    opacity: 0.3,
+  errorCredenciales: {
+    paddintTop: 2,
+    fontSize: 16,
+    color: "white",
+    fontFamily: "InputFont",
   },
   sub: {
     fontSize: 14,
@@ -124,11 +88,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.textoClaro,
     textDecorationLine: "underline",
-  },
-  errorCredenciales: {
-    paddintTop: 2,
-    fontSize: 16,
-    color: "white",
-    fontFamily: "InputFont",
   },
 });

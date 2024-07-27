@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import { colors } from "../global/colors";
 
 const OrderItem = ({ order }) => {
   return (
     <View style={styles.card}>
-      <View style={styles.textContainer}>
         <Text style={styles.text}>{order.date}</Text>
         {order.items.map((el, idx) => {
           return (
@@ -15,8 +13,6 @@ const OrderItem = ({ order }) => {
           );
         })}
         <Text style={styles.text2}>${order.total}</Text>
-      </View>
-      <Feather name="search" size={30} color="black" />
     </View>
   );
 };
@@ -26,12 +22,14 @@ export default OrderItem;
 const styles = StyleSheet.create({
   card: {
     marginHorizontal: 15,
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
+    paddingVertical: 15,
+    paddingHorizontal: 40,
     backgroundColor: colors.cards,
     shadowColor: "black",
     borderRadius: 20,
+    justifyContent: 'space-between',
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
 
     shadowOffset: {
       width: 4,
@@ -41,21 +39,17 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 4,
   },
-  textContainer: {
-    width: "70%",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-  },
   text: {
     fontFamily: "SecundariaFont",
     fontSize: 17,
     color: "black",
-    marginBottom: 5
+    marginVertical: 5
   },
   text2: {
+    width: '100%',
     fontFamily: "SecundariaFont",
     fontSize: 19,
     color: "gray",
+    textAlign: 'right'
   },
 });

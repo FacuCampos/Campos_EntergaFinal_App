@@ -1,14 +1,18 @@
-export {default as AddressItem} from './AddressItem'
-export {default as Card} from './Card'
-export {default as CartItem} from './CartItem'
-export {default as CategoryList} from './CategoryList'
-export {default as Counter} from './Counter'
-export {default as Header} from './Header'
-export {default as InputForm} from './InputForm'
-export {default as Loading} from './Loading'
-export {default as MapPreview} from './MapPreview'
-export {default as MyStatusBar} from './MyStatusBar'
-export {default as OrderItem} from './OrderItem'
-export {default as ProductItem} from './ProductItem'
-export {default as Search} from './Search'
-export {default as SubmitButton} from './SubmitButton'
+export { default as AddressItem } from "./AddressItem";
+export { default as Card } from "./Card";
+export { default as CartItem } from "./CartItem";
+export { default as CategoryList } from "./CategoryList";
+export { default as Counter } from "./Counter";
+export { default as CustomButton } from "./CustomButton";
+export { default as Header } from "./Header";
+export { default as InputForm } from "./InputForm";
+export { default as Loading } from "./Loading";
+export { default as LocationForm } from "./LocationForm";
+export { default as MapPreview } from "./MapPreview";
+export { default as MyStatusBar } from "./MyStatusBar";
+export { default as OrderItem } from "./OrderItem";
+export { default as ProductItem } from "./ProductItem";
+export { default as RegisterForm } from "./RegisterForm";
+export { default as Search } from "./Search";
+export { default as SubmitButton } from "./SubmitButton";
+export { default as Subtitle } from "./Subtitle";
