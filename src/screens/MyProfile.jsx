@@ -50,7 +50,7 @@ const MyProfile = ({ navigation }) => {
       </View>
       <CustomButton
         accion={() => navigation.navigate("ImageSelector")}
-        texto={imageCamera ? "Cambiar imagen" : "Agregar foto de perfil"}
+        texto={imageCamera || imageFromBase ? "Cambiar imagen" : "Agregar foto de perfil"}
         estilo={styles.btn}
       />
       <CustomButton

@@ -51,7 +51,6 @@ const LocationSelector = ({ navigation }) => {
           const url_reverse_geocode = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&key=${googleMapsApiKey}`;
           const response = await fetch(url_reverse_geocode);
           const data = await response.json();
-          console.log(data.results[0]);
           setAddress(data.results[0].formatted_address);
         }
       } catch (err) {

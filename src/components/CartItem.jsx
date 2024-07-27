@@ -2,8 +2,16 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../global/colors";
+import { useDispatch } from "react-redux";
+import { removeCartItem } from "../features/Cart/CartSlice";
 
 const CartItem = ({ cartItem }) => {
+  const dispatch = useDispatch();
+
+  const removeItem = () => {
+    dispatch(removeCartItem(cartItem));
+  };
+
   return (
     <View style={styles.card}>
       <View style={styles.textContainer}>
@@ -24,7 +32,12 @@ const CartItem = ({ cartItem }) => {
           {cartItem.precio * cartItem.cantidad}
         </Text>
       </View>
-      <MaterialCommunityIcons name="trash-can" size={30} color="black" />
+      <MaterialCommunityIcons
+        name="trash-can"
+        size={30}
+        color="black"
+        onPress={removeItem}
+      />
     </View>
   );
 };
@@ -42,7 +55,7 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     borderRadius: 20,
 
-    alignItems: 'center',
+    alignItems: "center",
 
     shadowOffset: {
       width: 4,
@@ -54,7 +67,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    height: '100%',
+    height: "100%",
     display: "flex",
     justifyContent: "space-between",
   },
@@ -63,6 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   texto: {
-    fontSize: 14
-  }
+    fontSize: 14,
+  },
 });

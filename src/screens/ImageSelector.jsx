@@ -10,6 +10,7 @@ import {
   usePostProfileImageMutation,
 } from "../services/shopServices";
 import CustomButton from "../components/CustomButton";
+import { colors } from "../global/colors";
 
 const ImageSelector = ({ navigation }) => {
   const [imagen, setImagen] = useState(null);
@@ -58,27 +59,42 @@ const ImageSelector = ({ navigation }) => {
     }
   };
 
+  const defaultImageRoute = "../../assets/userIcon.png";
+
+  const deleteImage = () => {
+    try {
+      setImagen("default");
+    } catch (error) {
+      console.log({ errorDeleteImg: error });
+    }
+  };
+
   const confirmImage = () => {
     try {
-      dispatch(setCameraImage(imagen));
-      triggerPostImage({ imagen, localId });
+      if (imagen == "default") {
+        dispatch(setCameraImage(null));
+        triggerPostImage({ imagen: null, localId });
+      } else {
+        dispatch(setCameraImage(imagen));
+        triggerPostImage({ imagen, localId });
+      }
       navigation.goBack();
     } catch (error) {
       console.log({ errorSetImage: error });
     }
   };
 
-  const defaultImageRoute = "../../assets/userIcon.png";
-
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.imgContainer}>
         <Image
           style={styles.img}
           resizeMode="cover"
           source={
-            imagen || imageFromBase
-              ? { uri: imageFromBase?.image || imagen }
+            imagen == "default"
+              ? require(defaultImageRoute)
+              : imagen || imageFromBase
+              ? { uri: imagen || imageFromBase?.image }
               : require(defaultImageRoute)
           }
         />
@@ -86,6 +102,7 @@ const ImageSelector = ({ navigation }) => {
       <CustomButton
         accion={() => pickImage(true)}
         texto={imagen || imageFromBase ? "Tomar nueva foto" : "Tomar una foto"}
+        estilo={styles.btn}
       />
       <CustomButton
         accion={() => pickImage(false)}
@@ -94,30 +111,34 @@ const ImageSelector = ({ navigation }) => {
             ? "Subir nueva foto"
             : "Seleccionar desde galería"
         }
+        estilo={styles.btn}
+      />
+      <CustomButton
+        accion={deleteImage}
+        texto="Borrar foto"
+        estilo={styles.btn}
       />
       <CustomButton
         accion={
           imagen || imageFromBase ? confirmImage : () => navigation.goBack()
         }
         texto={imagen || imageFromBase ? "Confirmar foto" : "Cancelar"}
+        estilo={styles.btn}
       />
-    </View>
+    </>
   );
 };
 
 export default ImageSelector;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-  },
   imgContainer: {
     borderRadius: 100,
     backgroundColor: "#050505",
     borderColor: "#8f8f8f",
     borderWidth: 2,
+    marginTop: 20,
+    marginBottom: 10,
 
     overflow: "hidden",
 
@@ -134,5 +155,15 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: "center",
     alignItems: "center",
+  },
+  btn: {
+    backgroundColor: colors.secundario,
+    width: "70%",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 10,
   },
 });
