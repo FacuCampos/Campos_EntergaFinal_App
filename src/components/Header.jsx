@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 const Header = ({ titulo, categoriaElegida}) => {
 

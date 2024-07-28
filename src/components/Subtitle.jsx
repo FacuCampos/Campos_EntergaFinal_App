@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { Ionicons } from "@expo/vector-icons";
 
 const Subtitle = ({ navigation, titulo, estilo = styles.subTitulo }) => {
@@ -43,5 +43,6 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     fontFamily: "TituloFont",
     flex: 1,
+    top: 3
   },
 });

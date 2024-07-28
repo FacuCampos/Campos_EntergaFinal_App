@@ -11,7 +11,7 @@ import {
 
 import { useGetProductByIdQuery } from "../services/shopServices";
 
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { Counter, CustomButton, Loading, Subtitle } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { addCartItem } from "../features/Cart/CartSlice";

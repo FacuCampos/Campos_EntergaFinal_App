@@ -1,6 +1,7 @@
 import * as ExpoSQLite from "expo-sqlite";
+import { Platform } from "react-native";
 
-const db = ExpoSQLite.openDatabase("sessions.db");
+const db = Platform.OS !== 'web' && ExpoSQLite.openDatabase("sessions.db");
 
 // crear la tabla
 export const initSQLiteDB = () => {

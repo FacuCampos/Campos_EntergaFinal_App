@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Image, Platform, StyleSheet, View } from "react-native";
+import { Dimensions, Image, Platform, StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as ImagePicker from "expo-image-picker";
@@ -10,7 +10,9 @@ import {
   usePostProfileImageMutation,
 } from "../services/shopServices";
 import CustomButton from "../components/CustomButton";
-import { colors } from "../global/colors";
+import { colors } from "../global";
+import Toast from "react-native-toast-message";
+import { Subtitle } from "../components";
 
 const ImageSelector = ({ navigation }) => {
   const [imagen, setImagen] = useState(null);
@@ -65,7 +67,14 @@ const ImageSelector = ({ navigation }) => {
     try {
       setImagen("default");
     } catch (error) {
-      console.log({ errorDeleteImg: error });
+      Toast.show({
+        type: "error",
+        text1: "¡Error!",
+        text2: "No se ha podido eliminar la imagen",
+        duration: 3000,
+        position: "top",
+        topOffset: 60,
+      });
     }
   };
 
@@ -80,12 +89,32 @@ const ImageSelector = ({ navigation }) => {
       }
       navigation.goBack();
     } catch (error) {
-      console.log({ errorSetImage: error });
+      Toast.show({
+        type: "error",
+        text1: "¡Error!",
+        text2: "Ocurrió un error al cargar la imagen",
+        duration: 3000,
+        position: "top",
+        topOffset: 60,
+      });
     }
   };
 
+  const anchoPantalla = Dimensions.get("screen").width;
+
   return (
     <>
+      <Subtitle
+        navigation={navigation}
+        titulo={"Foto de perfil"}
+        estilo={{
+          fontSize: 30,
+          textAlign: "center",
+          fontFamily: "TituloFont",
+          textAlignVertical: "center",
+          width: anchoPantalla - 130,
+        }}
+      />
       <View style={styles.imgContainer}>
         <Image
           style={styles.img}

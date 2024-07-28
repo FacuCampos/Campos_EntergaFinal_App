@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { useDispatch } from "react-redux";
 import { removeCartItem } from "../features/Cart/CartSlice";
 

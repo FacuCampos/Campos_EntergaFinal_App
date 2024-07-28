@@ -1,4 +1,4 @@
-export const colors = {
+const colors = {
     primario: '#bb4430',
     secundario: '#e09f3e',
     terceario: '#a6e1fa',
@@ -8,3 +8,5 @@ export const colors = {
     textoClaro: '#f4f4f4',
     textoOscuro: '#040404'
 }
+
+export default colors

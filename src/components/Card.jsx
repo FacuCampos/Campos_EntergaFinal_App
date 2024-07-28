@@ -1,10 +1,10 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
-import { colors } from "../global/colors";
 
 import { useDispatch } from "react-redux";
 import { setCategorySelected } from "../features/Shop/ShopSlice";
+import { colors } from "../global";
 
 const Card = ({ categoriaElegida, navigation }) => {
 

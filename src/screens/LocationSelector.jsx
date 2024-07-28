@@ -1,9 +1,9 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as Location from "expo-location";
 
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 import {
   CustomButton,
@@ -13,11 +13,11 @@ import {
 } from "../components";
 import { googleMapsApiKey } from "../database/googleMaps";
 import { usePostLocationMutation } from "../services/shopServices";
+import Toast from "react-native-toast-message";
 
 const LocationSelector = ({ navigation }) => {
   const [location, setLocation] = useState({ latitude: "", longitude: "" });
   const [address, setAddress] = useState("");
-  const [error, setError] = useState("");
 
   const [triggerPostUserLocation, result] = usePostLocationMutation();
 
@@ -28,7 +28,14 @@ const LocationSelector = ({ navigation }) => {
       try {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {
-          setError("Se denegó el permiso a la ubicación");
+          Toast.show({
+            type: "error",
+            text1: "¡Error!",
+            text2: "Se han denegado los permisos",
+            duration: 3000,
+            position: "top",
+            topOffset: 60,
+          });
           return;
         }
         if (status == "granted") {
@@ -39,7 +46,14 @@ const LocationSelector = ({ navigation }) => {
           });
         }
       } catch (err) {
-        console.log({ errorLocationRequest: err });
+        Toast.show({
+          type: "error",
+          text1: "¡Error!",
+          text2: "Ha ocurrido un error inesperado",
+          duration: 3000,
+          position: "top",
+          topOffset: 60,
+        });
       }
     })();
   }, []);
@@ -54,7 +68,14 @@ const LocationSelector = ({ navigation }) => {
           setAddress(data.results[0].formatted_address);
         }
       } catch (err) {
-        console.log({ errorSetAddress: err });
+        Toast.show({
+          type: "error",
+          text1: "¡Error!",
+          text2: "Se produjo un error",
+          duration: 3000,
+          position: "top",
+          topOffset: 60,
+        });
       }
     })();
   }, [location]);
@@ -75,13 +96,32 @@ const LocationSelector = ({ navigation }) => {
 
       navigation.goBack();
     } catch (err) {
-      console.log({ errorPostUserLocation: err });
+      Toast.show({
+        type: "error",
+        text1: "¡Error!",
+        text2: "No se ha podido establecer la ubicación",
+        duration: 3000,
+        position: "top",
+        topOffset: 60,
+      });
     }
   };
 
+  const anchoPantalla = Dimensions.get("screen").width;
+
   return (
     <>
-      <Subtitle navigation={navigation} titulo="Mi dirección" />
+      <Subtitle
+        navigation={navigation}
+        titulo={"Establecer ubicación"}
+        estilo={{
+          fontSize: 30,
+          textAlign: "center",
+          fontFamily: "TituloFont",
+          textAlignVertical: "center",
+          width: anchoPantalla - 130,
+        }}
+      />
       {location ? (
         <ScrollView>
           <View style={styles.container}>
@@ -113,7 +153,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   text: {
     fontFamily: "SecundariaFont",

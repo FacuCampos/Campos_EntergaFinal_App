@@ -1,7 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 const AddressItem = ({ location, navigation }) => {
   const onChangeLocation = () => {
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: colors.secundario,
     padding: 10,
-    margin: 10,
+    marginTop: 20,
     borderWidth: 2,
     borderRadius: 10,
     flexDirection: "row",

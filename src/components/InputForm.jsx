@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 const InputForm = ({
   label,
@@ -24,7 +24,7 @@ const InputForm = ({
         onChangeText={onChangeText}
         secureTextEntry={isSecure}
       />
-      {error && <Text style={styles.error}>{error}</Text>}
+      {error != "" && <Text style={styles.error}>{error}</Text>}
     </View>
   );
 };

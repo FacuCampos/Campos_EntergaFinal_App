@@ -1,5 +1,5 @@
 import { Platform, Pressable, StyleSheet, Text } from "react-native";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 const CustomButton = ({
   accion = () => {},

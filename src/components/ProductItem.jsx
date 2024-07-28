@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 import { useDispatch } from "react-redux";
 import { setItemSelected } from "../features/Shop/ShopSlice";

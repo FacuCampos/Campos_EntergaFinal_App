@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { FontAwesome5, FontAwesome6, AntDesign } from "@expo/vector-icons";
 
 const Search = ({ onSearch = () => {}, goBack = () => {}, error = "" }) => {

@@ -6,7 +6,7 @@ import {
   View
 } from "react-native";
 import React, { useState } from "react";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 import { useDispatch, useSelector } from "react-redux";
 import {

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {Login,Signup} from "../screens";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { StyleSheet } from "react-native";
 
 const Stack = createNativeStackNavigator();

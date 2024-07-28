@@ -6,7 +6,7 @@ import {
   OrderStackNavigator,
 } from "../navigation";
 import { Header } from "../components";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
 import MyProfileStackNavigator from "./MyProfileStackNavigator";

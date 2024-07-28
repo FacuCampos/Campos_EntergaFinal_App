@@ -1,11 +1,13 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Platform, Pressable, StyleSheet, Text } from "react-native";
 import { useEffect, useState } from "react";
 import { SubmitButton, InputForm, RegisterForm } from "../components";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { useSignUpMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/User/UserSlice";
 import { signupSchema } from "../validations/singupSchema";
+import Toast from "react-native-toast-message";
+import { insertSession } from "../persistence";
 
 const Signup = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -21,14 +23,40 @@ const Signup = ({ navigation }) => {
   const [triggerSignUp, result] = useSignUpMutation();
 
   useEffect(() => {
-    if (result.isSuccess) {
-      dispatch(
-        setUser({
-          email: result.data.email,
-          idToken: result.data.idToken,
-          localId: result.data.localId,
-        })
-      );
+    try {
+      if (result?.data && result.isSuccess) {
+        if (Platform.OS !== "web") {
+          insertSession({
+            localId: result.data.localId,
+            email: result.data.email,
+            token: result.data.idToken,
+          }).then((response) => {
+            dispatch(
+              setUser({
+                email: result.data.email,
+                idToken: result.data.idToken,
+                localId: result.data.localId,
+              })
+            );
+          });
+        } else {
+          dispatch(
+            setUser({
+              email: result.data.email,
+              idToken: result.data.idToken,
+              localId: result.data.localId,
+            })
+          );
+        }
+      }
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "¡Error!",
+        text2: "Ha ocurrido un error al crear sesión",
+        duration: 3000,
+        position: "bottom",
+      });
     }
   }, [result]);
 
@@ -57,27 +85,27 @@ const Signup = ({ navigation }) => {
   };
 
   return (
-      <RegisterForm titulo={'Crea una cuenta'}>
-        <InputForm label={"Email"} onChange={setEmail} error={errorMail} />
-        <InputForm
-          label={"Contraseña"}
-          onChange={setPassword}
-          error={errorPassword}
-          isSecure={true}
-        />
-        <InputForm
-          label={"Confirmar contraseña"}
-          onChange={setConfirmPassword}
-          error={errorConfirmPassword}
-          isSecure={true}
-        />
+    <RegisterForm titulo={"Crea una cuenta"}>
+      <InputForm label={"Email"} onChange={setEmail} error={errorMail} />
+      <InputForm
+        label={"Contraseña"}
+        onChange={setPassword}
+        error={errorPassword}
+        isSecure={true}
+      />
+      <InputForm
+        label={"Confirmar contraseña"}
+        onChange={setConfirmPassword}
+        error={errorConfirmPassword}
+        isSecure={true}
+      />
 
-        <SubmitButton onPress={onSubmit} title="Enviar" />
-        <Text style={styles.sub}>¿Ya tienes una cuenta?</Text>
-        <Pressable onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.subLink}>Ingresar</Text>
-        </Pressable>
-      </RegisterForm>
+      <SubmitButton onPress={onSubmit} title="Enviar" />
+      <Text style={styles.sub}>¿Ya tienes una cuenta?</Text>
+      <Pressable onPress={() => navigation.navigate("Login")}>
+        <Text style={styles.subLink}>Ingresar</Text>
+      </Pressable>
+    </RegisterForm>
   );
 };
 

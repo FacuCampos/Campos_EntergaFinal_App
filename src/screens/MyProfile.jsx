@@ -1,18 +1,17 @@
 import {
   Image,
   Platform,
-  Pressable,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-import { colors } from "../global/colors";
+import { colors } from "../global";
 import { useGetProfileImageQuery } from "../services/shopServices";
 import { clearUser } from "../features/User/UserSlice";
-import { truncateSession } from "../persistence";
 import { CustomButton } from "../components";
+
+import { truncateSession } from "../persistence";
 
 const MyProfile = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -28,10 +27,17 @@ const MyProfile = ({ navigation }) => {
 
   const signOut = async () => {
     try {
-      await truncateSession();
+      Platform.OS !== "web" && await truncateSession();
       dispatch(clearUser());
     } catch (error) {
-      console.log({ errorClearUser: error });
+      Toast.show({
+        type: "error",
+        text1: "¡Error!",
+        text2: "Ocurrió un error al cerrar la sesión",
+        duration: 3000,
+        position: "top",
+        topOffset: 60,
+      });
     }
   };
 

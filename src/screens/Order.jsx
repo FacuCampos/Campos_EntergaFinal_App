@@ -1,6 +1,5 @@
 import { FlatList } from "react-native";
 import React from "react";
-import { colors } from "../global/colors";
 import { useGetOrdersByUserQuery } from "../services/shopServices";
 import { OrderItem } from "../components";
 

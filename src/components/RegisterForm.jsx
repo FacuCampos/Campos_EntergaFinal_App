@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 const RegisterForm = ({ children , titulo }) => {
   return (
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 4.65,
     elevation: 4,
+    top: -10,
   },
   title: {
     fontSize: 30,

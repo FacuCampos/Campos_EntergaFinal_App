@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Order from "../screens/Order";
-import { colors } from "../global/colors";
+import { colors } from "../global";
 
 const Stack = createNativeStackNavigator();
 
