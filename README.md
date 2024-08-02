@@ -34,8 +34,8 @@ Este proyecto es una aplicacion desarrollada con React Native, una librería de 
 ## Organización del proyecto:
 
 - **Carpeta Raiz:** Aqui se encuentran las carpetas _assets_ y _src_, junto con el _App.jsx_, los _package.json_ y las configuraciones de babel.
-  - **assets:** contiene una carpeta _fonts_ con todas las fuentes utilizadas.
-  - **src:** aqui se almacena todo el codigo fuente de la aplicación.
+- **assets:** contiene una carpeta _fonts_ con todas las fuentes utilizadas.
+- **src:** aqui se almacena todo el codigo fuente de la aplicación.
 
 Dentro de la carpeta _src_ se encuentra lo siguiente:
 
@@ -80,12 +80,18 @@ Por ultimo se renderiza el componente. En caso de que non haya productos filtrad
 
 ### ItemDetail
 Muestra el detalle del producto elegido. Recibe *navigation* y *route*.
+
 Lo primero que hace es traer las dimensiones de la pantalla y traer el producto elegido desde el *route*.
 Luego se crea la variable **count**, la referencia el valor del estado *counter*.
+
 Seguidamente se trae el hook *useDispatch* y el **useGetProductByIdQuery** (Creado en *shopServices*, utiliza *Redux/Toolkit* para filtrar y devolver elproducto que coincida con el id pedido).
+
 Luego crea un estado *portrait* y le asigna un valor booleano en un *useEffect* utilizando los valores obtenidos con *useWindowDimensions*.
+
 Abajo se crea un useEffect que reinicia el contador cada vez que se desmonta el componente.
+
 A este le sigue una función de agregar al carrito que mediante un dispatch llama al reducer *addCartItem* del *CartSlice*.
+
 Por ultimo se ejecuta el montaje del componente, el cual en el caso de que *isLoading* sea *true*, mostrará el componente *Loading*.
 
 ### Cart
@@ -94,10 +100,10 @@ Muestra el carrito de comprar con los productos elegidos y las cantidades. Da la
 El componente utiliza el hook **useSelector** de la librería *react-redux* para acceder al estado del carrito y el total desde la tienda Redux asi como el *user* del estado *auth*. Y más adelante se invoca a **useDispatch**, de la misma librería.
 
 La función **confirmarOrden** es llamada cuando el usuario pulsa el botón "Confirmar orden". Esta función crea un nuevo objeto **Date** para obtener la fecha actual, llama a la función **triggerPostOrder** (el trigger de **usePostOrderMutation**, que referencia al endpoint de la shopApi definida en *shopServices*) con un objeto que contiene:
-- *items:* el array de items del carrito.
-- *user:* la dirección de correo electrónico del usuario.
-- *total:* el coste total de los artículos.
-- *fecha:* la fecha actual en el formato "DD/MM/AAAA".
+- **items:** el array de items del carrito.
+- **user:** la dirección de correo electrónico del usuario.
+- **total:** el coste total de los artículos.
+- **fecha:** la fecha actual en el formato "DD/MM/AAAA".
 Una vez hacho el trigger, envía la acción **deleteCart** para borrar el estado del carrito.
 
 El componente se renderiza:
@@ -134,7 +140,9 @@ Todas las funciones se pasan como props a los componentes **CustomButton**.
 
 Por ultimos renderiza los siguientes elementos:
 
-- Un componente *View* que contiene un componente *Image*, que muestra la imagen de perfil del usuario. La fuente de la imagen está determinada por las siguientes reglas: Si existen **imageCamera** o **imageFromBase**, utiliza la propiedad uri de *imageFromBase* o *imageCamera*. En caso contrario, utiliza la imagen predeterminada de la ruta *defaultImageRoute*.
+- Un componente *View* que contiene un componente *Image*, que muestra la imagen de perfil del usuario. La fuente de la imagen está determinada por las siguientes reglas:
+    - Si existen **imageCamera** o **imageFromBase**, utiliza la propiedad uri de *imageFromBase* o *imageCamera*.
+    - En caso contrario, utiliza la imagen predeterminada de la ruta *defaultImageRoute*.
 - Tres componentes **CustomButton**, cada uno con una acción diferente. El primer botón navega a la pantalla *ImageSelector* cuando se pulsa. El segundo botón llama a la función *launchLocation*. El tercer botón llama a la función *signOut*.
 
 ### ImageSelector
@@ -163,3 +171,19 @@ El componente muestra los siguiente elementos:
     - El segundo permite al usuario seleccionar una imagen de la galería, tambien llama a *pickImage*, pero esta vez le pasa un *false* por parámetro.
     - El tercero borra la imagen seleccionada mediante *deleteImage*.
     - El cuarto confirma la imagen seleccionada y la sube al servidor en case de existir *imagen* o *imageFromBase*, de lo contrario funciona para cancelar y volver a la pantalla anterior.
+
+### ListAddress
+Es una pantalla que muestra la ubicación actual del usuario, y proporciona una opción para seleccionar una nueva ubicación si no hay ninguna establecida. Recibe por prop el elemento *navigation*.
+
+El componente utiliza el hook *useSelector* para acceder a la propiedad localId del estado *auth*.
+
+Luego utiliza **useGetLocationQuery** para obtener la localización del usuario desde la API creada en *shopServices*.
+
+Por último muestra diferentes elementos en función de si el usuario tiene una ubicación establecida o no:
+
+- Si el usuario tiene una ubicación establecida muestra:
+    - Un componente **Subtitle** con el título "Mi Ubicación".
+    - Un componente **AddressItem** que muestra la ubicación del usuario. Recibe la ubicación y el navigation.
+- Si el usuario no tiene una ubicación establecida muestra:
+    - Un componente *Text* que muestra el mensaje "No hay ubicación establecida".
+    - Un componente **CustomButton** que permite al usuario navegar a la pantalla **LocationSelector** para seleccionar una ubicación.
