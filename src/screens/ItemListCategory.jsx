@@ -1,4 +1,9 @@
-import { Dimensions, FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 
 import { Search, ProductItem, Subtitle } from "../components";
@@ -10,17 +15,15 @@ const ItemListCategory = ({ navigation, route }) => {
   const [keyword, setKeyword] = useState("");
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [error, setError] = useState("");
+  const [portrait, setPortrait] = useState(true);
+  const [key, setKey] = useState("flatListPortrait");
 
   const { categoriaElegida } = route.params;
-  const {
-    data: productsFetched,
-    error: errorFetched,
-    isLoading,
-  } = useGetProductsByCategoryQuery(categoriaElegida.nombre);
+  const { data: productsFetched, isLoading } = useGetProductsByCategoryQuery(
+    categoriaElegida.nombre
+  );
 
   const { width, height } = useWindowDimensions();
-  const [portrait, setPortrait] = useState(null);
-  const [key, setKey] = useState("flatListPortrait");
 
   useEffect(() => {
     setPortrait(width < height);
@@ -38,11 +41,9 @@ const ItemListCategory = ({ navigation, route }) => {
     }
   }, [keyword, categoriaElegida, productsFetched, isLoading]);
 
-  if (!productsFetched) {
+  if (isLoading) {
     return <Loading />;
   }
-
-  const anchoPantalla = Dimensions.get("screen").width;
 
   return (
     <View style={portrait ? styles.container : styles.containerLandscape}>
@@ -57,7 +58,7 @@ const ItemListCategory = ({ navigation, route }) => {
           textAlign: "center",
           fontFamily: "TituloFont",
           textAlignVertical: "center",
-          width: anchoPantalla - 130,
+          width: width - 130,
         }}
       />
       <Search

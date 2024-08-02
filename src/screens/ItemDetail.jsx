@@ -24,27 +24,26 @@ const ItemDetail = ({ navigation, route }) => {
 
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
-
-  const [orientacion, setOrientacion] = useState("portrait");
-
   const { data: producto, isLoading } = useGetProductByIdQuery(
     productoElegido.id
   );
 
-  useEffect(() => {
-    if (width > height) setOrientacion("landscape");
-    else setOrientacion("portrait");
-  }, [width, height]);
+  const [portrait, setPortrait] = useState(true);
 
-  const handleAgregarCarrito = () => {
-    dispatch(addCartItem({ ...producto, cantidad: count }));
-  };
+  useEffect(() => {
+    setPortrait(width < height);
+  }, [width, height]);
 
   useEffect(() => {
     return () => {
       dispatch(resetCounter());
     };
   }, []);
+  
+  const handleAgregarCarrito = () => {
+    dispatch(addCartItem({ ...producto, cantidad: count }));
+  };
+
 
   if (isLoading) {
     return <Loading />;
@@ -52,14 +51,14 @@ const ItemDetail = ({ navigation, route }) => {
 
   return (
     <ScrollView>
-      {producto && orientacion === "portrait" && (
+      {producto && portrait && (
         <Subtitle navigation={navigation} titulo={producto.titulo} />
       )}
 
       {producto && (
         <View
           style={
-            orientacion === "portrait"
+            portrait
               ? styles.prodContainer
               : { ...styles.prodContainer, ...styles.prodContainerLandscape }
           }
@@ -67,25 +66,25 @@ const ItemDetail = ({ navigation, route }) => {
           <Image
             source={{ uri: producto.imagenes[0] }}
             style={
-              orientacion === "portrait" ? styles.image : styles.imageLandscape
+              portrait ? styles.image : styles.imageLandscape
             }
             resizeMode="cover"
           />
           <View
             style={
-              orientacion === "portrait"
+              portrait
                 ? styles.textContainer
                 : styles.textContainerLandscape
             }
           >
             <View
               style={
-                orientacion === "portrait"
+                portrait
                   ? styles.textBox
                   : styles.textBoxLandscape
               }
             >
-              {orientacion !== "portrait" && (
+              {portrait && (
                 <Text style={styles.titulo}>{producto.titulo}</Text>
               )}
               <Text style={styles.descripcion}>{producto.descripcion}</Text>
@@ -99,7 +98,7 @@ const ItemDetail = ({ navigation, route }) => {
             accion={handleAgregarCarrito}
             texto="+ Añadir al carrito"
             estilo={
-              orientacion === "portrait"
+              portrait
                 ? styles.buttonAdd
                 : {
                     ...styles.buttonAdd,
