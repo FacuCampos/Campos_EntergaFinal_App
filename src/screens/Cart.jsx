@@ -14,17 +14,18 @@ import { deleteCart } from "../features/Cart/CartSlice";
 
 const Cart = () => {
   const { items: cartData, total } = useSelector((state) => state.cart.value);
+  const dispatch = useDispatch();
+
+  const {user} = useSelector((state) => state.auth.value)
 
   const [triggerPostOrder, result] = usePostOrderMutation();
-
-  const dispatch = useDispatch();
 
   const confirmarOrden = () => {
     const date = new Date();
 
     triggerPostOrder({
       items: cartData,
-      user: "mail@mail.com",
+      user: user,
       total,
       date: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
     });

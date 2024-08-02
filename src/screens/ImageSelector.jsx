@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dimensions, Image, Platform, StyleSheet, View } from "react-native";
+import { Dimensions, Image, StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as ImagePicker from "expo-image-picker";
@@ -16,12 +16,11 @@ import { Subtitle } from "../components";
 
 const ImageSelector = ({ navigation }) => {
   const [imagen, setImagen] = useState(null);
-
   const dispatch = useDispatch();
-
-  const [triggerPostImage, result] = usePostProfileImageMutation();
   const { localId } = useSelector((state) => state.auth.value);
+
   const { data: imageFromBase } = useGetProfileImageQuery(localId);
+  const [triggerPostImage, result] = usePostProfileImageMutation();
 
   const verifyCameraPermission = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();

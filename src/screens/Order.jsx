@@ -2,9 +2,13 @@ import { FlatList } from "react-native";
 import React from "react";
 import { useGetOrdersByUserQuery } from "../services/shopServices";
 import { OrderItem } from "../components";
+import { useSelector } from "react-redux";
 
 const Order = () => {
-  const { data: orderData } = useGetOrdersByUserQuery("mail@mail.com");
+
+  const {user} = useSelector((state)=>state.auth.value)
+
+  const { data: orderData } = useGetOrdersByUserQuery(user);
 
   return (
     <FlatList
