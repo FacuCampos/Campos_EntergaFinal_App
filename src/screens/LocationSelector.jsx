@@ -128,7 +128,6 @@ const LocationSelector = ({ navigation }) => {
             <MapPreview location={location} />
             <Text style={styles.text}>Direccion encontrada:</Text>
             <Text style={styles.address}>{address}</Text>
-            <LocationForm />
             <CustomButton
               accion={onConfirmAddress}
               texto="Confirmar direccion"
