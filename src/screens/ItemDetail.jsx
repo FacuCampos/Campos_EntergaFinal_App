@@ -84,7 +84,7 @@ const ItemDetail = ({ navigation, route }) => {
                   : styles.textBoxLandscape
               }
             >
-              {portrait && (
+              {!portrait && (
                 <Text style={styles.titulo}>{producto.titulo}</Text>
               )}
               <Text style={styles.descripcion}>{producto.descripcion}</Text>
@@ -202,4 +202,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 10,
   },
+  titulo: {
+    fontSize: 24,
+    lineHeight: 28,
+    fontFamily: "TituloFont",
+    flex: 1,
+    marginBottom: 5
+  }
 });
