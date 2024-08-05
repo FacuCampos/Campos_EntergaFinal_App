@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "start",
     gap: 18,
-    marginVertical: 20
+    marginTop: 20,
+    marginBottom: 5
   },
   icons: {
     top: 10,

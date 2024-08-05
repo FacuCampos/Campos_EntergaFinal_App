@@ -1,9 +1,4 @@
-import {
-  FlatList,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
 import React, { useEffect, useState } from "react";
 
 import { Search, ProductItem, Subtitle } from "../components";
@@ -72,7 +67,7 @@ const ItemListCategory = ({ navigation, route }) => {
           key={key}
           data={productosFiltrados}
           keyExtractor={(prod) => prod.id}
-          contentContainerStyle={{ gap: 10, paddingBottom: 10 }}
+          contentContainerStyle={{ gap: 10, paddingBottom: 10, paddingTop: 15 }}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <ProductItem producto={item} navigation={navigation} />
@@ -99,6 +94,7 @@ export default ItemListCategory;
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    flex: 1,
   },
   containerLandscape: {
     marginTop: 20,
