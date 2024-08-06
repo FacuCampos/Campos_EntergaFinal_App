@@ -29,7 +29,7 @@ Este proyecto es una aplicacion desarrollada con React Native, una librería de 
 ## Links
 
 - **Repositorio:** https://github.com/FacuCampos/Campos_EntregaFinal_App
-- **Deployment:** https://campos-entregafinal-app.netlify.app/
+- **Deployment:** https://proyectofinal-app-campos.netlify.app/
 
 ## Organización del proyecto:
 
