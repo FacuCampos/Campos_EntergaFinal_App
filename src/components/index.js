@@ -7,7 +7,6 @@ export { default as CustomButton } from "./CustomButton";
 export { default as Header } from "./Header";
 export { default as InputForm } from "./InputForm";
 export { default as Loading } from "./Loading";
-export { default as LocationForm } from "./LocationForm";
 export { default as MapPreview } from "./MapPreview";
 export { default as MyStatusBar } from "./MyStatusBar";
 export { default as OrderItem } from "./OrderItem";

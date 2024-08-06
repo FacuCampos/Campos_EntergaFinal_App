@@ -7,7 +7,6 @@ import { colors } from "../global";
 
 import {
   CustomButton,
-  LocationForm,
   MapPreview,
   Subtitle,
 } from "../components";
