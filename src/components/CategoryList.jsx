@@ -1,31 +1,9 @@
-import {
-  FlatList,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
 import { useGetCategoriesQuery } from "../services/shopServices";
 import Loading from "./Loading";
-
-const formatData = (catData, numColumns) => {
-  const newData = [...catData];
-
-  const numberOfFullRows = Math.floor(newData.length / numColumns);
-
-  let numberOfElementsLastRow = newData.length - numberOfFullRows * numColumns;
-
-  while (
-    numberOfElementsLastRow !== numColumns &&
-    numberOfElementsLastRow !== 0
-  ) {
-    newData.push({ nombre: "vacio" });
-    numberOfElementsLastRow = numberOfElementsLastRow + 1;
-  }
-  return newData;
-};
 
 const CategoryList = ({ navigation }) => {
   const { data } = useGetCategoriesQuery();
@@ -42,6 +20,24 @@ const CategoryList = ({ navigation }) => {
   }, [width, height]);
 
   const numColumns = orientacion === "portrait" ? 2 : 4;
+
+  const formatData = (catData, numColumns) => {
+    const newData = [...catData];
+
+    const numberOfFullRows = Math.floor(newData.length / numColumns);
+
+    let numberOfElementsLastRow =
+      newData.length - numberOfFullRows * numColumns;
+
+    while (
+      numberOfElementsLastRow !== numColumns &&
+      numberOfElementsLastRow !== 0
+    ) {
+      newData.push({ nombre: "vacio" });
+      numberOfElementsLastRow = numberOfElementsLastRow + 1;
+    }
+    return newData;
+  };
 
   if (!data) {
     return <Loading />;

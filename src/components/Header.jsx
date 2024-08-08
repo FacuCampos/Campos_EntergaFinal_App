@@ -9,7 +9,7 @@ import React from "react";
 
 import { colors } from "../global";
 
-const Header = ({ titulo, categoriaElegida}) => {
+const Header = ({ titulo }) => {
 
   return (
     <View style={styles.container}>

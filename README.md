@@ -270,3 +270,174 @@ El componente muestra diferentes elementos en función de si se ha encontrado o 
         - Un componente **CustomButton** que permite al usuario confirmar su dirección.
 - Si no se ha encontrado la ubicación del usuario se mostrará:
     - Un componente *View* que muestra el texto "Ubicación no encontrada".
+
+
+## Componentes
+
+### AddressItem
+
+Crea la vista de la tarjeta que muestra la dirección en **ListAddress**. Recibe la ubicación y el objeto *navigation* por props.
+
+Este componente crea una función **onChangeLocation**, que utiliza el *navigation* para llamar a la pantalla **LocationSelector**.
+
+### Card
+
+Este componentes representa las tarjetas con las que se muestran las categorias. Recibe el *navigation* y la categoria elegida.
+
+Luego almacena el *useDispatch* en una constante y crea una función **handleNavigate**. En ésta se utiliza el dispatch para ejecutar el **setCategorySelected** de **ShopSlice** y posteriormente navegar a **ItemListCategory** pasandole así mismo la categoria elegida.
+
+### CartItem
+
+Se utiliza para mostrar cada elemento en el carrito. Recibe un objeto con la informacion del item. En caso de querer borrar del carrito el item, crea un función **removeItem** que ejecuta **removeCartItem**, importadod desde el **CartSlice**.
+
+### CategoryList
+
+Muestra la lista de categorías en un diseño de cuadrícula. El componente utiliza el hook **useGetCategoriesQuery** (importado desde **shopServices**) para obtener datos de una API y el hook **useWindowDimensions** para obtener las dimensiones actuales de la ventana.
+
+El componente utiliza el hook *useState* para almacenar la orientación actual del dispositivo en la variable de estado **orientacion**. El hook *useEffect* se utiliza para actualizar el estado **orientacion** cada vez que cambian las dimensiones de la ventana.
+
+Para mostrar la lista se utiliza un *Flatlist*. El número de columnas de la grilla viene determinado por la variable de estado **orientacion**. Si el dispositivo está en modo vertical, la cuadrícula tendrá 2 columnas, de lo contrario, tendrá 4 columnas.
+
+La función **formatData** que se define posteriormente formatea los datos obtenidos de la API en un formato adecuado para el *FlatList*. La función toma los datos y el número de columnas como argumentos y devuelve un nuevo array con los datos formateados.
+La función funciona de la siguiente manera:
+1. Crea una copia del array de datos original.
+2. Calcula el número de filas completas en función del número de columnas.
+3. Calcula el número de elementos de la última fila.
+4. Añadir elementos vacíos a la última fila hasta que esté llena.
+Esto asegura que todos los elementos del *Flatlist* tengan el mismo tamaño, evitando que los elementos de la última fila queden estirados al ser una cantidad menor a las columnas de la grilla.
+
+Por último se renderiza el *Flatlist*, en caso de no existir **data** mostrará el componente **Loading**. La propiedad *data* del *FlatList* utiliza el retorno del **formatData** y puede renderizar 2 elementos dependiendo del item:
+- En caso de que el item sea uno de los creados en **formatData** llamado "vacio", creará un elemento *View* invisible.
+- En el caso contrario al anterior, mostrará el componente **Card** y le pasará la categoria elegida y el navigation. 
+
+### Counter
+
+Es un componente que muestra un contador con botones de incremento y decremento, así como una entrada de texto para establecer el contador en un valor específico.
+
+Utiliza el hook *useSelector* para seleccionar el valor actual del contador del estado de Redux.
+
+También se usa el hook *useState* para almacenar el valor de la entrada de texto en una variable de estado local **inputToAdd**.
+
+Luego se definen 3 funciones:
+- **handleDecrement**: Usa el hook *useDispatch* para ejecutar **decrement** desde **CounterSlice**. Luego cambia el estado de **InputToAdd** al valor del contador menos 1.
+- **handleIncrement**: Usa el hook *useDispatch* para ejecutar **increment** desde **CounterSlice**. Luego cambia el estado de **InputToAdd** al valor del contador más 1.
+- **handleIncrementToAmount**: Usa el hook *useDispatch* para ejecutar **incrementToAmount** desde **CounterSlice** y le pasa el valor del input. Luego cambia el estado de **InputToAdd** al valor elegido.
+
+Al finalizar retorna un componente con 2 botones, para incrementar y decrementar el contador, y un *TextInput* donde se muestra el valor del contador y donde se puede establecer una cantidad específica.
+
+### CustomButton
+Devuelve un botón personalizado utilizando los parámetros deseados. Recibe la acción que el botón realizará, el texto interior, un estilo espécifico (en caso dee no pasarse ninguno usará el creado por defecto), el estilo del texto (tambien tiene un estilo por defecto en caso de no pasarse esta propiedad), y un booleano que define si el boton esta o no habilitado.
+
+### Header
+Es el componente superior que se muestra en toda la app. Recibe el titulo de la pantalla y lo muestra.
+
+### InputForm
+
+Muestra un campo de entrada de formulario con una etiqueta, una entrada de texto y un mensaje de error opcional.
+
+El componente acepta las siguientes propiedades:
+
+- **label:** El texto que se mostrará como etiqueta del campo de entrada.
+- **onChange:** Una función de llamada de retorno que se llamará cuando cambie el valor de la entrada.
+- **error:** Un mensaje de error opcional para mostrar debajo del campo de entrada. Por defecto es una cadena vacía.
+- **isSecure:** Un booleano que indica si el campo de entrada debe ser seguro (por ejemplo, para introducir contraseñas). Por defecto es false.
+- **estilo:** Un objeto de estilo personalizado para aplicar al campo de entrada. Tiene definido un valor por defecto en caso de no pasarse dicha prop.
+- **estiloTxt:** Un objeto de estilo personalizado para aplicar al texto de la etiqueta. Es opciónal ya que también posee un valor por defecto.
+
+Utiliza el hook *useState* para almacenar el valor del input en una variable de estado.
+El componente define una función manejadora **onChangeText** que actualiza la entrada de estado local y llama a la función **onChange** pasada como prop.
+
+Luego devuelve un elemento JSX que representa el campo de formulario de entrada.
+El texto de la etiqueta se muestra utilizando un componente *Text* con el estilo personalizado.
+El campo de entrada se muestra mediante un componente *TextInput* con el estilo personalizado. La propiedad *secureTextEntry* se establece en **isSecure** para habilitar la entrada segura si es necesario.
+El controlador *onChangeText* se adjunta al evento **onChangeText** del campo de entrada.
+Si se proporciona un mensaje de error, se muestra debajo del campo de entrada utilizando un componente de texto con el estilo personalizado.
+
+### Loading
+
+Es un componente que se muestra cada vez que se esperan las consultas a la base de datos. Contiene unicamente un elemento *Text* y un *ActivityIndicator* de *react-native*.
+
+### MapPreview
+
+Muestra una vista previa estática del mapa de una ubicación determinada.
+El componente acepta unicamente la prop **location**, un objeto que contiene las coordenadas de latitud y longitud de la ubicación a mostrar en el mapa.
+Construye una URL para que la API estática de Google Maps genere una imagen estática del mapa. La URL incluye los siguientes parámetros:
+- **center:** Las coordenadas de latitud y longitud de la ubicación para centrar el mapa.
+- **zoom:** El nivel de zoom del mapa.
+- **size:** El tamaño de la imagen del mapa.
+- **maptype:** El tipo de mapa a mostrar.
+- **markers:** Un marcador para mostrar en el mapa en la ubicación especificada, con un color rojo y una etiqueta "Yo".
+- **key:** La clave de la API de Google Maps (almacenada en la variable **googleMapsApiKey** e importada desde **database**).
+La URL construida se almacena en la variable **mapPreviewUrl**.
+El componente luego devuelve un elemento JSX que muestra la imagen estática del mapa.
+La imagen del mapa se muestra mediante un componente *Image* con la propiedad *source* definida como **mapPreviewUrl**.
+
+### MyStatusBar
+
+Representa la barra de estado del dispositivo, usa el hook *useSelector* para obtener el usuario, y dependiendo de si existe o no cambia el estilo.
+
+### OrderItem
+
+Este componente devuelve una tarjeta de orden. Recibe la orden por parámetro y muestra la fecha de la compra seguida de una lista de los items comprados y el total de la compra.
+
+
+### ProductItem
+
+Muestra un producto con un título, una imagen y funciones de navegación.
+El componente acepta dos props:
+- **producto:** Un objeto que contiene los datos del producto, incluyendo el título y la miniatura.
+- **navigation:** El objeto de navegación.
+Utiliza tres hooks:
+- **useWindowDimensions:** Devuelve las dimensiones actuales de la ventana.
+- **useState:** Crea una variable de estado **portrait** para rastrear si el dispositivo está en modo vertical u horizontal.
+- **useDispatch:** Devuelve la función de envío del almacén Redux.
+Tambien hace uso de un efecto (*useEffect*) para actualizar la variable de estado **portrait** cada vez que cambian las dimensiones de la ventana.
+
+Luego define la función **handleNavigate**, la cual se llama cuando se pulsa el elemento retornado por el componente. La función hace lo siguiente:
+- Utiliza un dispatch para ejecutar **setItemSelected** desde **ShopSlice** y le envía el nombre del producto.
+- Navega a la pantalla **ItemDetail** usando *navigation.navigate*, pasando el producto seleccionado como parámetro.
+
+El componente devuelve un elemento JSX que muestra una tarjeta del producto. Se envuelve en un componente *Pressable* con un controlador de eventos *onPress* establecido en **handleNavigate**. El Pressable tiene un estilo condicional basado en el estado de **portrait**.
+Dentro del *Pressable*, hay un componente *View* que contiene:
+- Un componente *Text* que muestra el título del producto, con un estilo condicional basado en el estado de **portrait**.
+- Un componente *Image* que muestra la miniatura del producto.
+
+### RegisterForm
+
+Este componente es una envoltura para elementos de formulario.
+
+Es un *View* que contiente un título y otro elemento *View* que cumple la funcion de regla horizontal (hr).
+
+Acepta dos props:
+- **children:** Los elementos del formulario que se renderizarán dentro del componente.
+- **titulo:** El título a mostrar en la parte superior del formulario.
+
+Devuelve un elemento JSX que muestra el formulario.
+
+El formulario se envuelve en un componente *View* y el título se muestra utilizando un componente *Text*.
+El elemento **children** se muestra debajo del elemento **hr** y contiene los campos y botones del formulario.
+
+### Search
+
+Este componente proporciona una barra de búsqueda con campo de entrada, botón de búsqueda y botón de borrar.
+
+Acepta dos props:
+- **onBúsqueda:** Una función que se ejecuta cuando se pulsa el botón de búsqueda. Recibe la palabra clave de búsqueda actual como argumento. Por defecto es una función vacía.
+- **error:** Un mensaje de error que se mostrará debajo del campo de entrada. Por defecto es una cadena vacía.
+
+Utiliza el hook *useState* para gestionar el estado de la palabra clave de búsqueda (**keyword**).
+
+Devuelve un elemento JSX que muestra la barra de búsqueda, la cual está envuelta en un componente *View*. El campo de entrada es un componente *TextInput* con un valor vinculado al estado de **keyword**.
+Si se proporciona un mensaje de error, se muestra debajo del campo de entrada utilizando un componente *Text*.
+El botón de búsqueda es un *Pressable* con un icono importado desde *FontAwesome5* que llama a la función **onSearch** con la palabra clave actual cuando se pulsa.
+El botón de borrar es otro *Pressable* con otro icono de *FontAwesome6* que borra el campo de entrada estableciendo el estado de la palabra clave en una cadena vacía cuando se pulsa.
+
+### SubmitButton
+
+Es un botón personalizado con un estilo específico, recibe una función y un texto por parámetros. Luego devuelve un elemento *TouchableOpacity* con un *onPress* que ejecuta la funcion recibida.
+
+### Subtitle
+
+Este componente se utiliza en todas las pantallas donde se necesite un subtítulo. Recibe el objeto *navigation*, un texto y un objeto de estilos opcional.
+
+Devuelve un contenedor con un *Pressable* con la función *goBack()* de *navigation* junto al titulo recibido por props.
