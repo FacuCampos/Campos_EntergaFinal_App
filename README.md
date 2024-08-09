@@ -272,7 +272,7 @@ El componente muestra diferentes elementos en función de si se ha encontrado o 
     - Un componente *View* que muestra el texto "Ubicación no encontrada".
 
 
-## Componentes
+## Components
 
 ### AddressItem
 
@@ -441,3 +441,62 @@ Es un botón personalizado con un estilo específico, recibe una función y un t
 Este componente se utiliza en todas las pantallas donde se necesite un subtítulo. Recibe el objeto *navigation*, un texto y un objeto de estilos opcional.
 
 Devuelve un contenedor con un *Pressable* con la función *goBack()* de *navigation* junto al titulo recibido por props.
+
+## Database
+
+- **googleMaps.js:** Contiene la exportación de la API Key de Google Maps que se utilizará para mostrar la ubicación.
+- **realTimeDatabase.js:** Exporta la URL de la base de datos de firebase del proyecto.
+- **users.js:** Contiene dos exportaciones, la primera es la API Key de la autenticación de usuarios y la segunda es la URL de la base. Estos se utilizarán para crear la base de usuarios en **authServices**.
+
+## Features
+
+### CartSlice
+
+Es un slice de Redux que gestiona el estado de un carrito de la compra. Se crea usando la función *createSlice* de la librería *@reduxjs/toolkit*.
+El estado inicial del slice del carrito es un objeto con las siguientes propiedades:
+- **user:** El ID del usuario conectado.
+- **updatedAt:** La marca de tiempo de la última actualización del carrito.
+- **total:** El coste total de los artículos del carrito, inicialmente igual a null.
+- **items:** Un array de artículos, inicialmente vacío.
+El carrito tiene tres reductores:
+- **addCartItem:** Este reductor añade un nuevo artículo al carrito o actualiza la cantidad de un artículo existente. Toma un objeto *payload* con las siguientes propiedades:
+    - **id:** El ID del producto.
+    - **cantidad:** La cantidad del producto a añadir. Si el producto ya está en el carrito, actualiza la cantidad y recalcula el coste total. Si el producto no está en el carrito, lo añade y calcula el coste total. Actualiza la marca de tiempo **updatedAt** y devuelve el estado actualizado.
+- **removeCartItem:** Este reductor elimina un artículo del carrito. Toma un objeto *payload* con la propiedad **id** del producto a eliminar. Filtra el artículo del array de artículos y recalcula el coste total. Si el carrito está vacío, establece el total en null. Actualiza la marca de tiempo **updatedAt** y devuelve el estado actualizado.
+- **deleteCart:** Este reductor devuelve el carro a su estado inicial. Establece el array de artículos en una matriz vacía y el total en null. Devuelve el estado actualizado.
+
+### CounterSlice
+
+Es un slice de Redux que gestiona el estado de un contador. Proporciona una forma de aumentar, disminuir, establecer y restablecer el valor del contador.
+Es slice se crea usando *createSlice* de *toolkit*. El estado inicial del contador es un objeto con una única propiedad, *value*. El valor inicial del contador es 0.
+
+El contador dispone de cuatro reductores para gestionar el estado del contador:
+- **increment:** Incrementa el valor del contador en 1.
+- **decrement:** Disminuye el valor del contador en 1.
+- **incrementToAmount:** Establece el valor del contador a una cantidad específica recibida por parámetro.
+- **resetCounter:** Restablece el valor del contador a 0.
+
+### ShopSlice
+
+Este slice gestiona el estado de la tienda. Proporciona una forma de buscar la categoría o el artículo seleccionados.
+El estado inicial de la tienda es un objeto con dos propiedades:
+- **categorySelected:** La categoría seleccionada, establecida inicialmente como una cadena vacía.
+- **ItemSelected:** El artículo seleccionado, definido inicialmente como una cadena vacía.
+
+La sección de la tienda incluye dos reductores para gestionar el estado de la tienda:
+
+- **setCategorySelected:** Establece el estado de **categorySelected** al valor recibido por parámetro.
+- **setItemSelected:** Establece el estado de **ItemSelected** al valor recibido por parámetro.
+
+### UserSlice
+
+Exportado como **authSlice**, es un slice que gestiona el estado de autenticación de la aplicación. Proporciona una forma de almacenar y gestionar la información de autenticación del usuario.
+El estado inicial del slice **auth** es un objeto con tres propiedades:
+- **user:** El email del usuario autenticado, inicialmente establecido en null.
+- **token:** El token de autenticación, inicialmente igual a null.
+- **localId:** El ID local del usuario autenticado, inicialmente establecido en null.
+
+Proporciona tres reductores para gestionar el estado de autenticación:
+- **setUser:** Establece el usuario autenticado actualizando los valores del estado por los datos recibidos por parámetros. 
+- **clearUser:** Borra el usuario autenticado y la información de autenticación asociada, devolviendo todo al estado inicial.
+- **setCameraImage:** Actualiza la imagen de perfil del usuario.
