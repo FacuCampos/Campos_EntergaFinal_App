@@ -3,7 +3,7 @@ import { baseUrl } from "../database/realTimeDatabase";
 
 export const shopApi = createApi({
   reducerPath: "shopApi",
-  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
   tagTypes: ["profileImageGet", "locationGet"],
   endpoints: (builder) => ({
     getCategories: builder.query({

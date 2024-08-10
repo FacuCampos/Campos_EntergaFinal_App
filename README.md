@@ -568,3 +568,57 @@ Esta función recupera todas las sesiones de la tabla **sessions**. Devuelve una
 
 ### truncateSession
 La función truncateSession borra todas las sesiones de la tabla **sessions**. Devuelve una promesa que se resuelve con el resultado de la consulta SQL o se rechaza con un error. Al igual que en *getSesion* se aplica a todas las sesiones porque solo se trabaja con una.
+
+## Services
+
+### authServices
+Este fragmento de código crea la API para la autenticación utilizando *Redux Toolkit Query*. La API proporciona dos *endpoints* para dar de alta y de baja a los usuarios.
+
+La **authApi** se crea usando la función *createApi* de *Redux Toolkit Query* y se configura con las siguientes propiedades:
+- **reducerPath:** La ruta del reductor para la API, establecida a *authApi*.
+- **baseQuery:** La consulta de la base para la API, establecida a *fetchBaseQuery* con la *baseUrl* establecida a **baseAuthUrl** (importada desde **users**).
+- **endpoints:** Incluye las mutaciones signUp y signIn.
+    - **signUp:** Se define como una mutación mediante el método *builder.mutation*. Este endpoint toma un objeto **auth** como argumento y devuelve un objeto de consulta con las propiedades *url* (La URL del registro, incluida la clave de API y el método *signUp*), *method* (El método HTTP para la solicitud, establecido en "POST"), **body** (El cuerpo de la solicitud, establecido en el objeto **auth**)
+    - **signIn:** Se define de forma similar a **signUp**, con las mismas propiedades y configuración con la única diferencia de que en la url se utiliza *signInWithPassword*.
+
+Luego estos endpoints se exportan como hooks llamados **useSignInMutation** y **useSignUpMutation**.
+
+### shopServices
+
+Este código crea la API para la tienda utilizando *Redux Toolkit Query*. La API proporciona varios endpoints para recuperar y manipular datos relacionados con categorías, productos, pedidos, imágen de perfil y ubicacion.
+
+Al igual que **authApi**, **shopApi** se crea utilizando la función *createApi* y se configura con las siguientes propiedades:
+- **reducerPath:** La ruta del reductor para la API, establecida en **shopApi**.
+- **baseQuery:** La consulta de la base para la API, establecida en *fetchBaseQuery* con la **baseUrl** (importada desde **realTimeDatabase**) establecida.
+- **tagTypes:** Una lista de tipos de etiquetas, incluidas *profileImageGet* y *locationGet*, que se utilizan para el almacenamiento en caché y la invalidación.
+- **endpoints:** Incluye las siguientes consultas y mutaciones:
+    - **getCategories:** Recupera la lista de las categorías de la base.
+    - **getProductsByCategory:** Obtiene una lista de productos filtrados por categoría, la cual es recibida por parámetros. Luego formatea el respuesta para poder ser utilizada por la aplicación.
+    - **getProductById:** Recibe el ID de un producto por parámetro y recupera de la base la coincidencia. En caso de existir una coincidencia, formatea la respuesta y retorma el nuevo objeto.
+    - **postOrder:** Esta mutación crea una nueva orden de compra, recibe la orden por parámetro y la sube a la tabla **orders** de la base de datos.
+    - **getOrdersByUser:** Obtiene una lista de pedidos filtrados por usuario. Busca en la tabla **orders** aquellos pedidos cuyo usuario coincida con el valor recibido. Luego formatea la respuesta.
+    - **getProfileImage:** Obtiene la imagen de perfil filtrada por ID local. Busca en la tabla **profileImages** aquella que coincida con el **localId** recibido. Luego asigna la etiqueta *profileImageGet*.
+    - **postProfileImage:** Recibe una imagen y el localId y actualiza la imagen de perfil de la base, cuyo localId coincida con el recibido. Al ejecutarse, invalida la etiqueta *profileImageGet*.
+    - **getLocation:** Obtiene una ubicación del usuario guardada en la base de datos utilizando el localId para filtrarla. Al terminar asigna la etiqueta *locationGet*.
+    - **postLocation:** recibe un objeto llamado *location* con la información de la ubicación del usuario y su localId y actualiza los valores de *latitude*, *longitude* y *address* asociados al localId recibidos. También agrega el elemento *updatedAt* con la fecha en la cual se hizo la modificación (también lo recibe dentro de *location*). Por último invalida la etiqueta *locationGet*.
+
+Luego, todas las consultas y mutaciones se exportan como hooks.
+
+
+## Store
+
+Este código configura un almacén Redux con varios reductores, middleware y API de consulta de *toolkit*.
+
+La función *configureStore* se utiliza para crear el store. Toma un objeto con dos propiedades: *reducer* y *middleware*.
+
+*Reducer* es un objeto que define los reductores para el almacén. En este caso, hay cinco reductores:
+- **counter**: Gestiona el estado del contador creado en **CounterSlice**.
+- **shop:** Gestiona el estado de la tienda creado en **ShopSlice**.
+- **cart:** Gestiona el **CartSlice**.
+- **auth:** Gestiona la autenticación de **UserSlice**.
+- **[shopApi.reducerPath]:** Gestiona la **shopApi** de **ShopServices**, donde shopApi.reducerPath es una cadena que define la ruta para el reductor.
+- **[authApi.reducerPath]:** Gestionar la **authApi** de **authServices**, donde authApi.reducerPath es una cadena que define la ruta para el reductor.
+
+*Middleware* es una función que devuelve un array de funciones. En este caso, la función utiliza *getDefaultMiddleware* para obtener la matriz de middleware por defecto y luego concatena las funciones de middleware de **shopApi** y **authApi** utilizando el método concat. Estas funciones se utilizan para gestionar las solicitudes de API y el almacenamiento en caché.
+
+La función *setupListeners* se llama con la función *store.dispatch* como argumento. Esto configura los listeners para el almacén, lo que permite a las API de consulta del *Toolikt* enviar acciones y actualizar el store.
