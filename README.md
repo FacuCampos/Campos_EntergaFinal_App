@@ -500,3 +500,71 @@ Proporciona tres reductores para gestionar el estado de autenticación:
 - **setUser:** Establece el usuario autenticado actualizando los valores del estado por los datos recibidos por parámetros. 
 - **clearUser:** Borra el usuario autenticado y la información de autenticación asociada, devolviendo todo al estado inicial.
 - **setCameraImage:** Actualiza la imagen de perfil del usuario.
+
+## Navigation
+
+### Navigator
+El componente **Navigator** es un componente que maneja la autenticación del usuario y la navegación de la aplicación. Utiliza los hooks *useSelector* y *useDispatch* de la librería *react-redux* para interactuar con el estado de la aplicación.
+
+Realiza las siguientes tareas:
+- **Autenticación de usuarios:** Utiliza *useSelector* para recuperar el objeto usuario del estado de la aplicación. Si el usuario no está autenticado, muestra el AuthStackNavigator. Si el usuario está autenticado, muestra el BottomTabNavigator.
+- **Recuperación de sesión:** Si la aplicación se ejecuta en una plataforma nativa (es decir, no web), llama a la función **getSession** desde **persistance** para recuperar los datos de sesión del usuario. Si los datos de la sesión se recuperan correctamente, se envía la acción **setUser** de **UserSlice** para actualizar el estado de con la información del usuario.
+- **Manejo de errores:** Captura cualquier error que ocurra durante el proceso de recuperación de sesión y muestra una notificación con un mensaje de error.
+
+Utiliza el hook *useEffect* para ejecutar las acciones del componente cuando se monta o actualiza el valor **user** del estado **auth**. Dentro del efecto, ejecuta todo como una función asíncrona.
+
+Retorna un **NavigationContainer** con **BottomTabNavigator** o **AuthStackNavigator**, dependiendo de si el usuario está autenticado o no. También se agrega un componente **Toast** con una configuración personalizada para el manejo de errores en toda la aplicación, este componente solo será visible cuando sea llamado.
+
+### AuthStackNavigator
+
+Este es un componente funcional que define un navegador de pila para el flujo de autenticación de la aplicación. Utiliza la función *createNativeStackNavigator* de la biblioteca *react-navigation/native* para crear un navegador de pila.
+
+Realiza las siguientes tareas:
+- **Define un navegador:** Crea un navegador de pila mediante la función *createNativeStackNavigator*.
+- **Configura el navegador:** Agrega un nombre de ruta inicial de "Login" y opciones de pantalla personalizadas.
+- **Define pantallas:** Define dos pantallas en el navegador, *Login* y *Signup*, y las asocia a su componente correspondiente.
+
+### BottomTabNavigator
+
+Es un componente que define una barra de navegación inferior para la aplicación. Utiliza la función *createBottomTabNavigator* de la biblioteca *react-navigation/bottom-tabs*. 
+
+Realiza las siguientes tareas:
+- **Define el navegador:** Utiliza la función *createBottomTabNavigator* para crear el navegador.
+- **Define pestañas:** Define cuatro pantallas en el navegador. Éstas son *Tienda*, *Carrito*, *Orden* y *Perfil*. Luego las asocia con su componente correspondiente.
+
+Por último, configura cada pestaña con un icono personalizado, que cambia de color en función del estado enfocado.
+
+### HomeStackNavigator
+
+Este componente define un navegador de pila para la sección de inicio. Al igual que todos los Stack Navigators utiliza función *createNativeStackNavigator* para crear un navegador de pila.
+
+El componente realiza las siguientes tareas:
+- **Define un navegador:** Crea un navegador de pila utilizando la función *createNativeStackNavigator*. Luego los configura con un nombre de ruta inicial de "Home" y opciones de pantalla personalizadas.
+- **Define pantallas:** Define las pantallas *Home*, *ItemListCategory* e *ItemDetail* del navegador y las asocia 
+a su componente correspondiente.
+
+### CartStackNavigator y OrderStackNavigator
+
+Son similares al componente anterior, con la diferencia de que las rutas iniciales refinidas para cada uno son *CartScreen* y *OrderScreen* respectivamente; y que solo estan compuesto por una pantalla asociada al componente **Cart**, en el caso de *CartStackNavigator* y a **Order** en *OrderStackNavigator*.
+
+### MyProfileStackNavigator
+
+El último de los Stack Navigators de la aplicación. En este, la ruta de inicio es *MyProfile*. Define 4 pantallas: **MyProfile**, **ImageSelector**, **ListAddress** y **LocationSelector**. Cada una esta asociada a su componente homónimo.
+
+## Persistance
+
+Aqui se encuentra el código que gestiona la base de datos SQLite en la aplicación, utiliza la biblioteca *ExpoSQLite*. Esta base de datos se utiliza para almacenar datos de sesión de usuario.
+
+Lo primero que hace este código es inicializar la base de datos abriendo una conexión al archivo de base de datos SQLite **sessions.db**.
+
+### initSQLiteDB
+La función **initSQLiteDB** crea la tabla **sessions** con tres columnas: *localId*, *email* y *token*. La función devuelve una promesa que se resuelve con el resultado de la consulta SQL o se rechaza con un error.
+
+### insertSession
+**insertSession** inserta una nueva sesión en la tabla **sessions**. La función toma como argumento un objeto con las propiedades *localId*, *email* y *token*. Luego devuelve una promesa que se resuelve con el resultado de la consulta SQL o se rechaza con un error.
+
+### getSession
+Esta función recupera todas las sesiones de la tabla **sessions**. Devuelve una promesa que se resuelve con el resultado de la consulta SQL o se rechaza con un error. En este caso se piden todas las sesiones porque solo puede haber una.
+
+### truncateSession
+La función truncateSession borra todas las sesiones de la tabla **sessions**. Devuelve una promesa que se resuelve con el resultado de la consulta SQL o se rechaza con un error. Al igual que en *getSesion* se aplica a todas las sesiones porque solo se trabaja con una.
